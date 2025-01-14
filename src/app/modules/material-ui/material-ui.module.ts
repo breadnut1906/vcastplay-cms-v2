@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
-
+import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [],
@@ -16,6 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
+    DragDropModule,
   ]
 })
 export class MaterialUiModule { }
