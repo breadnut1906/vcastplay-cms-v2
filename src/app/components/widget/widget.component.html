@@ -1,1 +1,64 @@
-<div class="widget-container"></div>
+<mat-card class="mat-elevation-z3 container" cdkDrag cdkDragPreviewContainer="parent">
+    <mat-card-header>
+        <mat-card-title>{{ data().label }}</mat-card-title>
+        <div class="spacer"></div>
+        <button (click)="showOptions.set(true)" mat-icon-button><mat-icon>settings</mat-icon></button>
+    </mat-card-header>
+    <mat-card-content>
+        <ng-container [ngComponentOutlet]="data().content"></ng-container>
+
+        @if (showOptions()) {
+            <div class="position-absolute top-0 start-0 bg-secondary-subtle rounded-2 h-100 w-100 p-2">
+                <div class="float-end">
+                    <button class="text-danger" (click)="store.removeWidget(data().id)" mat-icon-button><mat-icon>delete</mat-icon></button>
+                    <button (click)="showOptions.set(false)" mat-icon-button><mat-icon>close</mat-icon></button>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center h-100">
+                    <div>
+                        <span class="mx-3">Width</span>
+                        <mat-button-toggle-group 
+                            name="width" 
+                            aria-label="Width Style" 
+                            [value]="data().columns ?? 1" 
+                            [hideSingleSelectionIndicator]="true"
+                            (change)="store.updateWidget(data().id, { columns: +$event.value })"
+                        >
+                            <mat-button-toggle value="1">Small</mat-button-toggle>
+                            <mat-button-toggle value="2">Medium</mat-button-toggle>
+                            <mat-button-toggle value="3">Large</mat-button-toggle>
+                            <mat-button-toggle value="4">Extra Large</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div>
+                        <span class="mx-3">Height</span>
+                        <mat-button-toggle-group 
+                            name="width" 
+                            aria-label="Width Style" 
+                            [value]="data().rows ?? 1" 
+                            [hideSingleSelectionIndicator]="true"
+                            (change)="store.updateWidget(data().id, { rows: +$event.value })"
+                        >
+                            <mat-button-toggle value="1">Small</mat-button-toggle>
+                            <mat-button-toggle value="2">Medium</mat-button-toggle>
+                            <mat-button-toggle value="3">Large</mat-button-toggle>
+                            <mat-button-toggle value="4">Extra Large</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                </div>
+                <div class="position-absolute top-50 start-0 mx-2">
+                    <button (click)="store.moveWidgetToLeft(data().id)" mat-icon-button><mat-icon>chevron_left</mat-icon></button>
+                </div>
+                <div class="position-absolute top-50 end-0 mx-2">
+                    <button (click)="store.moveWidgetToRight(data().id)" mat-icon-button><mat-icon>chevron_right</mat-icon></button>
+                </div>
+            </div>
+        }
+    </mat-card-content>
+    <div class="position-absolute bottom-0 start-0">
+        <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+        <mat-icon class="mat-caption" (mousedown)="store.onResizeStart(data().id, $event)">south_east</mat-icon>
+    </div>
+    <div *cdkDragPlaceholder></div>
+</mat-card>

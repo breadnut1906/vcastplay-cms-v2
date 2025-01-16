@@ -1,17 +1,16 @@
-<mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-    </button>
-</mat-toolbar>
-
-<div class="container">   
-    <app-widget></app-widget>
+<div class="container-fluid" cdkDropListGroup>
+    <div class="d-flex flex-row my-3">
+        <h3 class="me-auto">Dashboard</h3>
+        <button (click)="widgetsOpen.set(!widgetsOpen())" mat-flat-button><mat-icon>{{ widgetsOpen() ? 'close' : 'add_circle' }}</mat-icon>Widgets</button>
+        @if (widgetsOpen()) { 
+            <app-widget-panel cdkDrag cdkDropList (cdkDropListDropped)="widgetPutBack($event)" /> 
+        }
+            
+    </div>
+    <div #dashboard class="dashboard-widgets">
+        @for (widget of store.addedWidgets(); track widget.id) {
+            <app-widget cdkDropList [data]="widget" (cdkDropListDropped)="drop($event)" [cdkDropListData]="widget.id" />
+        }
+        <div cdkDropList (cdkDropListDropped)="drop($event)"></div>
+    </div> 
 </div>

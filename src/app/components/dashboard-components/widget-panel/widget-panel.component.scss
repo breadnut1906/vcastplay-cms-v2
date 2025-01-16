@@ -1,0 +1,28 @@
+
+:host {
+    background: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    width: 200px;
+    z-index: 2;
+    border-radius: 16px;
+}
+
+.widget-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface);
+    cursor: pointer;
+    padding: 8px 16px 8px 16px;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+
+    &:hover {
+        background: var(--mat-sys-surface-container-high);
+    }
+}

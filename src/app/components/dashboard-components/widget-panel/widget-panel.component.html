@@ -1,0 +1,12 @@
+<div class="widget-list p-3">
+    <div class="d-flex flex-row align-items-center mb-3">
+        <mat-icon cdkDragHandle>drag_indicator</mat-icon> Widgets
+    </div>
+
+    @for (widget of store.widgetsToAdd(); track widget.id) {
+        <div class="widget-box" cdkDrag [cdkDragData]="widget.id">
+            {{ widget.label }}
+            <div *cdkDragPlaceholder></div>
+        </div>
+    }
+</div>

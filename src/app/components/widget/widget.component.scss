@@ -1,14 +1,16 @@
 :host {
     display: block;
-    border-radius: 16px;
+    --mat-standard-button-toggle-height: 16px
 }
 
-.widget-container {
+.container {
     position: relative;
     height: 100%;
     width: 100%;
-    padding: 32px;
     box-sizing: border-box;
-    border-radius: inherit;
     overflow: hidden;
+
+    .mat-mdc-card-header {
+        cursor: move;
+    }
 }
