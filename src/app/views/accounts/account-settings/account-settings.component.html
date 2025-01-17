@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="d-flex flex-row my-3">
+        <h3 class="fs-4 me-auto">Account Settings</h3>
+        <div class="ms-auto">
+            <button (click)="showFilter.set(!showFilter())" matTooltip="Show Filter" mat-flat-button>
+                <mat-icon>{{ showFilter() ? 'close' : 'filter_alt' }}</mat-icon> Filter
+            </button>
+        </div>
+    </div>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="me-2">group</mat-icon> User Management
+            </ng-template>
+            <app-users [(showFilter)]="showFilter" />
+        </mat-tab>
+        <mat-tab label="Roles">
+            <ng-template mat-tab-label>
+                <mat-icon class="me-2">badge</mat-icon> Roles
+            </ng-template>
+            <app-roles [(showFilter)]="showFilter" />
+        </mat-tab>
+    </mat-tab-group>
+</div>

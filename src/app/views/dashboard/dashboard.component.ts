@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { MaterialUiModule } from '../../modules/material-ui/material-ui.module';
 import { ComponentsModule } from '../../modules/components/components.module';
 import { DashboardService } from '../../services/dashboard.service';
@@ -12,7 +12,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   styleUrl: './dashboard.component.scss',
   providers: [ DashboardService ]
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent {
 
   store = inject(DashboardService);
 

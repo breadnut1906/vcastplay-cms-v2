@@ -8,6 +8,7 @@ import { StorageService } from './storage.service';
 @Injectable()
 export class DashboardService {
 
+  private activeResizeId: number | null = null; // Track the currently resizing widget's ID
   private isResizing = false; // Add a flag to track resizing state
   private startX: number = 0;
   private startY: number = 0;
@@ -47,6 +48,13 @@ export class DashboardService {
     return this.widgets().filter(w => !addedIds.includes(w.id));
   })
 
+  saveWidgets = effect(() => {
+    const widgetsWithOutContent: Partial<Widget>[] = this.addedWidgets().map(w => ({ ...w }));
+    widgetsWithOutContent.forEach(w => delete w.content);
+
+    this.storage.set('dashboardWidgets', JSON.stringify(widgetsWithOutContent))
+  })
+
   fetchWidgets() {
     const widgetsAsString = this.storage.get('dashboardWidgets');
     if (widgetsAsString) {
@@ -80,7 +88,9 @@ export class DashboardService {
 
   onResizeStart(id: number, event: MouseEvent) {
     event.preventDefault();
-    this.isResizing = true;    
+    this.isResizing = true;   
+    this.activeResizeId = id; // Set the active widget being resized 
+    
     const index = this.addedWidgets().findIndex(w => w.id == id);
     
     if (index !== -1) {
@@ -91,13 +101,13 @@ export class DashboardService {
       this.initialRows = newWidgets[index].rows ?? 1;
       this.initialColumns = newWidgets[index].columns ?? 1;
 
-      document.addEventListener('mousemove', (e) => this.onResizing(e, id));
+      document.addEventListener('mousemove', this.onResizing);
       document.addEventListener('mouseup', this.onResizeEnd);
     }
   }
 
-  onResizing(event: MouseEvent, id: number = 1) {
-    if (!this.isResizing) return;
+  onResizing(event: MouseEvent) {
+    if (!this.isResizing || this.activeResizeId === null) return;
     
     const dx = event.clientX - this.startX;
     const dy = event.clientY - this.startY;
@@ -108,12 +118,14 @@ export class DashboardService {
     const columns = Math.min(newColumns, 4)
     const rows = Math.min(newRows, 4);
 
-    this.updateWidget(id, { rows, columns });
+    this.updateWidget(this.activeResizeId, { rows, columns });
   }
 
   onResizeEnd = (): void => {
-    if (!this.isResizing) return;
+    if (!this.isResizing || this.activeResizeId === null) return;
+  
     this.isResizing = false;
+    this.activeResizeId = null; // Reset active widget ID
 
     document.removeEventListener('mousemove', this.onResizing);
     document.removeEventListener('mouseup', this.onResizeEnd);
@@ -173,11 +185,4 @@ export class DashboardService {
     newWidgets.splice(positionToAdd, 0, widgetToAdd);
     this.addedWidgets.set(newWidgets);
   }
-
-  saveWidgets = effect(() => {
-    const widgetsWithOutContent: Partial<Widget>[] = this.addedWidgets().map(w => ({ ...w }));
-    widgetsWithOutContent.forEach(w => delete w.content);
-
-    this.storage.set('dashboardWidgets', JSON.stringify(widgetsWithOutContent))
-  })
 }

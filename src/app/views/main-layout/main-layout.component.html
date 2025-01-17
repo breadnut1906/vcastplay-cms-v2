@@ -1,5 +1,5 @@
 <mat-toolbar class="border-bottom">
-    <button (click)="drawer.toggle()" mat-icon-button aria-label="Sidebar button">
+    <button (click)="isMinimized.set(!isMinimized())" mat-icon-button aria-label="Sidebar button">
         <mat-icon>menu</mat-icon>
     </button>
     <span>VCAST PLAY v2</span>
@@ -9,50 +9,51 @@
     </button>
     <mat-menu #userAccount="matMenu">
         <button mat-menu-item><mat-icon>account_circle</mat-icon>My Profile</button>
-        <button mat-menu-item><mat-icon>manage_accounts</mat-icon>Account Settings</button>
+        <button mat-menu-item routerLink="/accounts"><mat-icon>manage_accounts</mat-icon>Account Settings</button>
         
-        <button mat-menu-item><mat-icon>logout</mat-icon>Logout</button>
+        <button routerLink="/login" mat-menu-item><mat-icon>logout</mat-icon>Logout</button>
     </mat-menu>
 </mat-toolbar>
 
-<mat-drawer-container class="vh-100">
-    <mat-drawer class="shadow rounded-0" #drawer mode="side">
-        <mat-nav-list class="px-3">
-            <mat-list-item class="rounded-0">
-                <mat-icon matListItemIcon>dashboard</mat-icon>
-                <div matListItemTitle>Dashboard</div>
-            </mat-list-item>
-            <mat-list-item class="rounded-0">
-                <mat-icon matListItemIcon>monitor</mat-icon>
-                <div matListItemTitle>Screen Registration</div>
-            </mat-list-item>
-            <mat-list-item class="rounded-0">
-                <mat-icon matListItemIcon>photo_library</mat-icon>
-                <div matListItemTitle>Asset Library</div>
-            </mat-list-item>
-            <mat-list-item class="rounded-0">
-                <mat-icon matListItemIcon>playlist_play</mat-icon>
-                <div matListItemTitle>Playlist</div>
-            </mat-list-item>
-            <mat-list-item class="rounded-0">
-                <mat-icon matListItemIcon>imagesearch_roller</mat-icon>
-                <div matListItemTitle>Design Layout</div>
-            </mat-list-item>
-            <mat-list-item class="rounded-0">
-                <mat-icon matListItemIcon>schedule</mat-icon>
-                <div matListItemTitle>Schedules</div>
-            </mat-list-item>
-            <mat-list-item class="rounded-0">
-                <mat-icon matListItemIcon>tv_displays</mat-icon>
-                <div matListItemTitle>Screen Management</div>
-            </mat-list-item>
-            <mat-list-item class="rounded-0">
-                <mat-icon matListItemIcon>description</mat-icon>
-                <div matListItemTitle>Reports</div>
-            </mat-list-item>
-        </mat-nav-list>
+<mat-drawer-container clas autosize>
+    <mat-drawer class="shadow rounded-0" #drawer mode="side" [opened]="true">
+        <div class="d-flex flex-column h-100">            
+            <mat-nav-list class="mt-3 mb-auto" [ngClass]="{ 'ms-3': !isMinimized() }">
+                @for (item of menuItems(); track $index) {
+                    <mat-list-item 
+                        class="rounded-0 mb-1" 
+                        [matTooltip]="item.text" 
+                        [matTooltipDisabled]="!isMinimized()" 
+                        matTooltipPosition="after"
+                        [routerLink]="item.route" 
+                        [ngClass]="{ 'p-0': isMinimized() }" 
+                        routerLinkActive="active"
+                    >
+                        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+                        @if (!isMinimized()) { <div matListItemTitle>{{ item.text }}</div> }
+                    </mat-list-item>
+                }
+            </mat-nav-list>
+            <mat-nav-list [ngClass]="{ 'ms-3': !isMinimized() }">
+                <mat-list-item 
+                    class="rounded-0" 
+                    matTooltip="About" 
+                    matTooltipPosition="after" 
+                    [matTooltipDisabled]="!isMinimized()" 
+                    [routerLink]="'/about'" 
+                    [ngClass]="{ 'p-0': isMinimized() }" 
+                    routerLinkActive="active"
+                >
+                    <mat-icon matListItemIcon>info</mat-icon>
+                    @if (!isMinimized()) { <div matListItemTitle>About</div> }
+                </mat-list-item>
+            </mat-nav-list>
+        </div>
     </mat-drawer>
     <mat-drawer-content>
-        <router-outlet />
+        <div class="d-flex flex-column h-100">
+            <router-outlet />
+            <app-footer class="mt-auto" />
+        </div>
     </mat-drawer-content>
 </mat-drawer-container>

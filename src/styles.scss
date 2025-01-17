@@ -1,6 +1,7 @@
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
+/* You can add global styles to this file, and also import other style files */
 @use 'bootstrap/scss/bootstrap';
 @use '@angular/material' as mat;
 
@@ -14,7 +15,38 @@ html {
     typography: Roboto,
     density: 0,
   ));
-}/* You can add global styles to this file, and also import other style files */
+
+  
+  @include mat.table-overrides((
+    row-item-outline-color: var(--mat-sys-surface-container-highest)
+  ));
+  
+  @include mat.form-field-overrides((
+    container-height: 10px
+  ));
+  
+  // @include mat.toolbar-overrides((
+  //   container-background-color: var(--mat-sys-primary),
+  //   container-text-color: var(--mat-sys-on-primary),
+  //   standard-height: 64px
+  // ));
+  
+  // @include mat.icon-overrides((
+  //   color: var(--mat-sys-on-primary),
+  // ));
+
+  .mat-drawer-container {
+    height: calc(100vh - 64px);
+
+    .mat-drawer {
+      width: var(--mat-sidenav-container-width);
+    }
+  }
+
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -27,4 +59,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   opacity: 0.5;
   border-left: 2px solid #000;
   padding-left: 8px;
+}
+
+
+/* Scrollbar effect */
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }

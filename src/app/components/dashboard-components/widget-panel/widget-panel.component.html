@@ -8,5 +8,7 @@
             {{ widget.label }}
             <div *cdkDragPlaceholder></div>
         </div>
+    } @empty {
+        <p class="fst-italic mat-caption">Drag here to remove widget</p>
     }
 </div>
