@@ -5,6 +5,9 @@
 @use 'bootstrap/scss/bootstrap';
 @use '@angular/material' as mat;
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 html {
   @include mat.theme((
     color: (
@@ -24,16 +27,6 @@ html {
   @include mat.form-field-overrides((
     container-height: 10px
   ));
-  
-  // @include mat.toolbar-overrides((
-  //   container-background-color: var(--mat-sys-primary),
-  //   container-text-color: var(--mat-sys-on-primary),
-  //   standard-height: 64px
-  // ));
-  
-  // @include mat.icon-overrides((
-  //   color: var(--mat-sys-on-primary),
-  // ));
 
   .mat-drawer-container {
     height: calc(100vh - 64px);
@@ -45,11 +38,10 @@ html {
 
   .mat-mdc-form-field {
     width: 100%;
+    
+    @include mat.form-field-density(-3);
   }
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .spacer {
   flex: 1 1 auto;

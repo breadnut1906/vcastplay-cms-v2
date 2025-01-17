@@ -1,8 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal, viewChild } from '@angular/core';
 import { MaterialUiModule } from '../../modules/material-ui/material-ui.module';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Sidenav } from '../../models/sidenav';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { UtilityService } from '../../services/utility.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-main-layout',
@@ -12,7 +14,9 @@ import { FooterComponent } from '../../components/footer/footer.component';
 })
 export class MainLayoutComponent {
 
-  isMinimized = signal(true);
+  utility = inject(UtilityService);
+  isMinimized = signal<boolean>(true);
+  drawer = viewChild.required<MatSidenav>('drawer');
 
   menuItems = signal<Sidenav[]>([
     {
@@ -56,4 +60,12 @@ export class MainLayoutComponent {
       route: '/reports',
     },
   ])
+
+  onClickToggleSideNav() {
+    if (this.utility.isMobileSignal()) {
+      this.drawer().toggle();
+    } else {
+      this.isMinimized.set(!this.isMinimized());
+    }
+  }
 }

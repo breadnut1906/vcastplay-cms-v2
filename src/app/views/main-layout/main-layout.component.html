@@ -1,51 +1,51 @@
 <mat-toolbar class="border-bottom">
-    <button (click)="isMinimized.set(!isMinimized())" mat-icon-button aria-label="Sidebar button">
+    <button (click)="onClickToggleSideNav()" mat-icon-button aria-label="Sidebar button">
         <mat-icon>menu</mat-icon>
     </button>
-    <span>VCAST PLAY v2</span>
+    <span class="mx-3">VCAST PLAY v2</span>
     <span class="spacer"></span>
     <button [mat-menu-trigger-for]="userAccount" mat-icon-button aria-label="User Account">
         <mat-icon>person</mat-icon>
     </button>
     <mat-menu #userAccount="matMenu">
-        <button mat-menu-item><mat-icon>account_circle</mat-icon>My Profile</button>
+        <button mat-menu-item routerLink="/my-profile"><mat-icon>account_circle</mat-icon>My Profile</button>
         <button mat-menu-item routerLink="/accounts"><mat-icon>manage_accounts</mat-icon>Account Settings</button>
         
         <button routerLink="/login" mat-menu-item><mat-icon>logout</mat-icon>Logout</button>
     </mat-menu>
 </mat-toolbar>
 
-<mat-drawer-container clas autosize>
-    <mat-drawer class="shadow rounded-0" #drawer mode="side" [opened]="true">
+<mat-drawer-container autosize>
+    <mat-drawer class="shadow rounded-0" #drawer [mode]="utility.isMobileSignal() ? 'over' : 'side'" [opened]="!utility.isMobileSignal()">
         <div class="d-flex flex-column h-100">            
-            <mat-nav-list class="mt-3 mb-auto" [ngClass]="{ 'ms-3': !isMinimized() }">
+            <mat-nav-list class="mt-3 mb-auto" [ngClass]="{ 'ms-3': !isMinimized() || utility.isMobileSignal() }">
                 @for (item of menuItems(); track $index) {
                     <mat-list-item 
                         class="rounded-0 mb-1" 
                         [matTooltip]="item.text" 
-                        [matTooltipDisabled]="!isMinimized()" 
+                        [matTooltipDisabled]="!isMinimized() || utility.isMobileSignal()" 
                         matTooltipPosition="after"
                         [routerLink]="item.route" 
-                        [ngClass]="{ 'p-0': isMinimized() }" 
+                        [ngClass]="{ 'p-0': isMinimized() && !utility.isMobileSignal() }" 
                         routerLinkActive="active"
                     >
                         <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-                        @if (!isMinimized()) { <div matListItemTitle>{{ item.text }}</div> }
+                        @if (!isMinimized() || utility.isMobileSignal() ) { <div matListItemTitle>{{ item.text }}</div> }
                     </mat-list-item>
                 }
             </mat-nav-list>
-            <mat-nav-list [ngClass]="{ 'ms-3': !isMinimized() }">
+            <mat-nav-list [ngClass]="{ 'ms-3': !isMinimized() || utility.isMobileSignal() }">
                 <mat-list-item 
                     class="rounded-0" 
                     matTooltip="About" 
                     matTooltipPosition="after" 
-                    [matTooltipDisabled]="!isMinimized()" 
+                    [matTooltipDisabled]="!isMinimized() || utility.isMobileSignal()" 
                     [routerLink]="'/about'" 
-                    [ngClass]="{ 'p-0': isMinimized() }" 
+                    [ngClass]="{ 'p-0': isMinimized() && !utility.isMobileSignal() }" 
                     routerLinkActive="active"
                 >
                     <mat-icon matListItemIcon>info</mat-icon>
-                    @if (!isMinimized()) { <div matListItemTitle>About</div> }
+                    @if (!isMinimized() || utility.isMobileSignal()) { <div matListItemTitle>About</div> }
                 </mat-list-item>
             </mat-nav-list>
         </div>

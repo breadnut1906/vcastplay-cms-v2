@@ -27,6 +27,11 @@ export const routes: Routes = [
                 title: `${projectTitle} · Account Settings`,
             },
             {
+                path: 'my-profile',
+                loadComponent: () => import('./views/accounts/my-profile/my-profile.component').then(m => m.MyProfileComponent),
+                title: `${projectTitle} · My Profile`
+            },
+            {
                 path: '**',
                 loadComponent: () => import('./views/page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent),
                 title: `${projectTitle} · Page Not Found`,

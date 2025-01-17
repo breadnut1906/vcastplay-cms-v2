@@ -2,9 +2,7 @@
     <div class="d-flex flex-row my-3">
         <h3 class="fs-4 me-auto">Account Settings</h3>
         <div class="ms-auto">
-            <button (click)="showFilter.set(!showFilter())" matTooltip="Show Filter" mat-flat-button>
-                <mat-icon>{{ showFilter() ? 'close' : 'filter_alt' }}</mat-icon> Filter
-            </button>
+            <button (click)="showFilter.set(!showFilter())" mat-flat-button><mat-icon>{{ showFilter() ? 'close' : 'filter_alt' }}</mat-icon> Filter</button>
         </div>
     </div>
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">

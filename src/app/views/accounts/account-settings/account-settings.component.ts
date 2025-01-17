@@ -14,5 +14,4 @@ import { UtilityService } from '../../../services/utility.service';
 export class AccountSettingsComponent {
 
   showFilter = signal<boolean>(false);
-  
 }
