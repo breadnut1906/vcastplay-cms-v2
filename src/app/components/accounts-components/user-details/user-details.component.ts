@@ -1,7 +1,7 @@
 import { Component, effect, inject, model, signal } from '@angular/core';
-import { MaterialUiModule } from '../../modules/material-ui/material-ui.module';
+import { MaterialUiModule } from '../../../modules/material-ui/material-ui.module';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-user-details',

@@ -2,6 +2,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 /* You can add global styles to this file, and also import other style files */
+@use "leaflet/dist/leaflet.css";
 @use 'bootstrap/scss/bootstrap';
 @use '@angular/material' as mat;
 
@@ -26,6 +27,12 @@ html {
   
   @include mat.form-field-overrides((
     container-height: 10px
+  ));
+
+  @include mat.button-overrides(( 
+    filled-container-color: #F58F20,
+    outlined-outline-color: #F58F20,
+    outlined-label-text-color: #F58F20
   ));
 
   .mat-drawer-container {

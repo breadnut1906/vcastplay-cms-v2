@@ -1,8 +1,8 @@
 <mat-drawer-container class="position-relative">
     <mat-drawer 
         #drawerDetails 
-        class="sideNavDetails"
-        mode="over" 
+        class="sideNavDetails shadow"
+        mode="side" 
         position="end" 
         [opened]="user.isDrawer()" 
         (closedStart)="user.isDrawer.set(false)" 

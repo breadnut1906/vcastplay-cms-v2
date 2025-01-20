@@ -3,9 +3,9 @@ import { MaterialUiModule } from '../../../modules/material-ui/material-ui.modul
 import { UsersComponent } from '../users/users.component';
 import { RolesComponent } from '../roles/roles.component';
 import { UtilityService } from '../../../services/utility.service';
-import { UserDetailsComponent } from '../../../components/user-details/user-details.component';
+import { UserDetailsComponent } from '../../../components/accounts-components/user-details/user-details.component';
 import { UsersService } from '../../../services/users.service';
-import { RoleDetailsComponent } from '../../../components/role-details/role-details.component';
+import { RoleDetailsComponent } from '../../../components/accounts-components/role-details/role-details.component';
 @Component({
   selector: 'app-account-settings',
   imports: [ MaterialUiModule, UsersComponent, UserDetailsComponent, RolesComponent, RoleDetailsComponent ],

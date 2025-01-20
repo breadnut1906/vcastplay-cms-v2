@@ -1,13 +1,12 @@
-import { Component, effect, inject, model, signal, viewChild } from '@angular/core';
+import { Component, effect, inject, model, signal } from '@angular/core';
 import { MaterialUiModule } from '../../../modules/material-ui/material-ui.module';
 import { UsersService } from '../../../services/users.service';
 import { UtilityService } from '../../../services/utility.service';
 import { ComponentsModule } from '../../../modules/components/components.module';
 import { FormControl, FormGroup } from '@angular/forms';
-import moment from 'moment';
 import { Users } from '../../../models/account-settings';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSidenav } from '@angular/material/sidenav';
+import moment from 'moment';
 
 @Component({
   selector: 'app-users',

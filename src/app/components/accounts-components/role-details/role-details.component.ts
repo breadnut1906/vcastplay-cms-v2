@@ -1,6 +1,6 @@
 import { Component, effect, inject } from '@angular/core';
-import { MaterialUiModule } from '../../modules/material-ui/material-ui.module';
-import { UsersService } from '../../services/users.service';
+import { MaterialUiModule } from '../../../modules/material-ui/material-ui.module';
+import { UsersService } from '../../../services/users.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
