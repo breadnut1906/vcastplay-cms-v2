@@ -1,22 +1,48 @@
-<div class="container-fluid">
-    <div class="d-flex flex-row my-3">
-        <h3 class="fs-4 me-auto">Account Settings</h3>
-        <div class="ms-auto">
-            <button (click)="showFilter.set(!showFilter())" mat-flat-button><mat-icon>{{ showFilter() ? 'close' : 'filter_alt' }}</mat-icon> Filter</button>
+<mat-drawer-container class="position-relative">
+    <mat-drawer 
+        #drawerDetails 
+        class="sideNavDetails"
+        mode="over" 
+        position="end" 
+        [opened]="user.isDrawer()" 
+        (closedStart)="user.isDrawer.set(false)" 
+        [disableClose]="true"
+    >
+        <div class="container mt-3">
+            @if (user.selectedTab() == 0) {
+                <app-user-details />
+            } @else {
+                <app-role-details />
+            }
         </div>
-    </div>
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <mat-icon class="me-2">group</mat-icon> User Management
-            </ng-template>
-            <app-users [(showFilter)]="showFilter" />
-        </mat-tab>
-        <mat-tab label="Roles">
-            <ng-template mat-tab-label>
-                <mat-icon class="me-2">badge</mat-icon> Roles
-            </ng-template>
-            <app-roles [(showFilter)]="showFilter" />
-        </mat-tab>
-    </mat-tab-group>
-</div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="container-fluid">
+            <div class="d-flex flex-row my-3">
+                <h3 class="fs-4 me-auto">Account Settings</h3>
+                <div class="ms-auto">
+                    <button class="me-2" (click)="showFilter.set(!showFilter())" mat-flat-button>
+                        <mat-icon>{{ showFilter() ? 'close' : 'filter_alt' }}</mat-icon> Filter
+                    </button>
+                    <button (click)="user.isDrawer.set(true)" mat-stroked-button>
+                        <mat-icon>add</mat-icon> New
+                    </button>
+                </div>
+            </div>
+            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedIndexChange)="user.selectedTab.set($event)">
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon class="me-2">group</mat-icon> User Management
+                    </ng-template>
+                    <app-users [(showFilter)]="showFilter" />
+                </mat-tab>
+                <mat-tab label="Roles">
+                    <ng-template mat-tab-label>
+                        <mat-icon class="me-2">badge</mat-icon> Roles
+                    </ng-template>
+                    <app-roles [(showFilter)]="showFilter" />
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

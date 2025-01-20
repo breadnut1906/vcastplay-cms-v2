@@ -2,13 +2,12 @@ import { Component, inject, signal, viewChild } from '@angular/core';
 import { MaterialUiModule } from '../../modules/material-ui/material-ui.module';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Sidenav } from '../../models/sidenav';
-import { FooterComponent } from '../../components/footer/footer.component';
 import { UtilityService } from '../../services/utility.service';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [ MaterialUiModule, RouterOutlet, RouterModule, FooterComponent ],
+  imports: [ MaterialUiModule, RouterOutlet, RouterModule ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })

@@ -4,80 +4,63 @@ import { Roles, Users } from '../models/account-settings';
 @Injectable()
 export class UsersService {
 
-  userTableColumns: string[] = [ 'code', 'name', 'email', 'mobile', 'role', 'lastUpdate', 'status', 'actions' ];
-  rolesTableColumns: string[] = [ 'name', 'description', 'lastUpdate', 'status', 'actions' ];
+  // Trigger when the sidebar is opened or closed
+  isDrawer = signal<boolean>(false);
 
+  // get the current tabindex
   selectedTab = signal<number>(0);
 
-  users = signal<Users[]>([])
+  users = signal<Users[]>([]);
+  
+  roleLists = signal<Roles[]>([]);
 
-  roleLists = signal<Roles[]>([
-    {
-      id: 1,
-      name: "Admin",
-      description: "Has full access to all features and settings.",
-      modules: [
-        { name: "Dashboard" },
-        { name: "User Management" },
-        { name: "Settings" },
-        { name: "Reports" }
-      ],
-      status: "Active",
-      lastUpdate: "2025-01-15T10:30:00Z"
-    },
-    {
-      id: 2,
-      name: "Editor",
-      description: "Can edit and publish content but has limited settings access.",
-      modules: [
-        { name: "Dashboard" },
-        { name: "Content Management" },
-        { name: "Reports" }
-      ],
-      status: "Active",
-      lastUpdate: "2025-01-15T10:30:00Z"
-    },
-    {
-      id: 3,
-      name: "Viewer",
-      description: "Can only view content and reports.",
-      modules: [
-        { name: "Dashboard" },
-        { name: "Reports" }
-      ],
-      status: "Inactive",
-      lastUpdate: "2025-01-15T10:30:00Z"
-    },
-    {
-      id: 4,
-      name: "Contributor",
-      description: "Can create and manage content but not publish it.",
-      modules: [
-        { name: "Content Management" },
-        { name: "Reports" }
-      ],
-      status: "Active",
-      lastUpdate: "2025-01-15T10:30:00Z"
-    },
-    {
-      id: 5,
-      name: "Moderator",
-      description: "Can moderate user-generated content and manage comments.",
-      modules: [
-        { name: "Content Management" },
-        { name: "User Management" }
-      ],
-      status: "Suspended",
-      lastUpdate: "2025-01-15T10:30:00Z"
-    }
-  ]);
+  userRoles = computed(() => [...new Set(this.users().map(w => w.role))]);
+  userStatus = computed(() => [...new Set(this.users().map(w => w.status))]);
 
-  roles = computed(() => [...new Set(this.users().map(w => w.role))]);
-  status = computed(() => [...new Set(this.users().map(w => w.status))]);
+  roles = computed(() => [...new Set(this.roleLists().map(w => w.name))]);
+  roleStatus = computed(() => [...new Set(this.roleLists().map(w => w.status))]);
+
+  selectedUser = signal<Users | null>(null);
+  selectedRole = signal<Roles | null>(null);
 
   constructor() { }
 
+  ////////////////////////////////////////////////////////////////
+  /**User Methods */
+  ////////////////////////////////////////////////////////////////
+
   onAddUsers(user: Users[]) {
+    // Call Api Here??
     this.users.set(user)
   }
+
+  onEditUser(user: Users) {    
+    this.selectedUser.set(user);
+    this.isDrawer.set(true);
+  }
+
+  onSaveUser() {
+    this.isDrawer.set(false);
+    this.selectedUser.set(null);
+  }
+
+  ////////////////////////////////////////////////////////////////
+  /**Role Methods */
+  ////////////////////////////////////////////////////////////////
+
+  onAddRoles(role: Roles[]) {
+    // Call Api Here??
+    this.roleLists.set(role);
+  }
+
+  onEditRole(role: Roles) {
+    this.selectedRole.set(role);
+    this.isDrawer.set(true);
+  }
+
+  onSaveRole() {
+    this.isDrawer.set(false);
+    this.selectedRole.set(null);
+  }
+
 }
