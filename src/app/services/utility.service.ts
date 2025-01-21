@@ -21,4 +21,8 @@ export class UtilityService {
         this.isMobileSignal.set(isMobile);
       });
   }
+
+  async onGetUserLocation() {
+    return await new Promise((resolve: any, reject: any) => navigator.geolocation.getCurrentPosition(resolve, reject))    
+  }
 }

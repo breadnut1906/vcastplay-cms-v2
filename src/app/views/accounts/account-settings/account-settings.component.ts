@@ -16,6 +16,7 @@ import { RoleDetailsComponent } from '../../../components/accounts-components/ro
 export class AccountSettingsComponent {
 
   user = inject(UsersService);
+  utility = inject(UtilityService);
   showFilter = signal<boolean>(false);
 
   constructor() { }

@@ -1,0 +1,17 @@
+span {
+    font-size: 0.75rem;
+}
+
+.geographic {
+    mat-icon {
+        color: var(--mat-sys-on-primary-container);
+        font-size: 3.75rem;
+        height: inherit;
+        width: inherit;
+    }
+
+    &:hover {
+        background-color: var(--mat-sys-primary-container);
+        color: var(--mat-sys-on-primary-container);
+    }
+}

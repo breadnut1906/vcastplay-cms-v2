@@ -1,0 +1,270 @@
+<div class="px-3 position-relative h-100">
+
+    @if (!screen.isViewMode()) {
+
+        <div class="py-3 border-bottom d-flex flex-row align-items-center">
+            <mat-card-title class="fw-semibold fs-5">Screen Details</mat-card-title>
+            <button class="ms-auto" (click)="screen.onSaveScreen(screenForm.value)" mat-raised-button><mat-icon>save</mat-icon> Save</button>
+        </div>
+
+        <form [formGroup]="screenForm" class="row g-2">
+            <div class="col-12 col-md-3">
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Code</mat-label>
+                    <input type="text" formControlName="code" readonly matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6">
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Screen Name</mat-label>
+                    <input type="text" formControlName="name" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-3">
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-select formControlName="type" placeholder="Type">
+                        <mat-option>--</mat-option>
+                        @for (item of screen.types(); track $index) {
+                            <mat-option [value]="item">{{ item }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <div class="d-flex flex-row align-items-center" matSubheader>
+                    Address: 
+                    <span class="spacer"></span>
+                    @if(!screen.isEditMode()) { 
+                        <span class="fst-italic">(click anywhere to select location)</span> 
+                    } 
+                </div>
+                <app-map [address]="screen.selectedScreen()?.address!" [editMode]="screen.isEditMode()" />
+                <div class="row g-2 mt-2 pb-3 border-bottom" formGroupName="address">
+                    <div class="col-6">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>City</mat-label>
+                            <input type="text" formControlName="city" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>State</mat-label>
+                            <input type="text" formControlName="state" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>Country</mat-label>
+                            <input type="text" formControlName="country" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>Zipcode</mat-label>
+                            <input type="text" formControlName="zipCode" matInput>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div matSubheader>Calton Data Recorder:</div>
+                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Calton Serial #:</mat-label>
+                    <input type="text" formControlName="caltonSerial" matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-tab-group>
+                    <mat-tab label="Orientation">
+                        <div formGroupName="orientation" class="row g-3 p-0 m-0 my-3">
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                    <mat-label>Orientation</mat-label>
+                                    <mat-select formControlName="orientation" placeholder="Orientation">
+                                        <mat-option>--</mat-option>
+                                        <mat-option value="Horizontal">Horizontal</mat-option>
+                                        <mat-option value="Vertical">Vertical</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                    <mat-label>Resolution</mat-label>
+                                    <mat-select formControlName="resolution" placeholder="Resolution">
+                                        @for (item of screen.resolutions(); track $index) {
+                                            <mat-option [value]="item">{{ item }}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Operational">
+                        <div formGroupName="schedule" class="row g-3 p-0 m-0 my-3">
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                    <mat-label>Type</mat-label>
+                                    <mat-select formControlName="type" placeholder="Type">
+                                        <mat-option value="Always On">Always On</mat-option>
+                                        <mat-option value="Week Days">Week Days</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div formGroupName="hours" class="col-12 d-flex flex-row">
+                                <mat-form-field class="me-2" appearance="outline" subscriptSizing="dynamic">
+                                    <mat-label>Start Time</mat-label>
+                                    <input formControlName="start" [matTimepicker]="startTime" matInput (click)="startTime.open()">
+                                    <mat-timepicker #startTime />
+                                    <mat-icon matSuffix>schedule</mat-icon>
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                    <mat-label>End Time</mat-label>
+                                    <input formControlName="end" [matTimepicker]="endTime" matInput (click)="endTime.open()">
+                                    <mat-timepicker #endTime />
+                                    <mat-icon matSuffix>schedule</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Geographic">
+                        <div formGroupName="geographic" class="row g-3 p-0 m-0 my-3">
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                    <mat-label>Locations</mat-label>
+                                    <mat-select formControlName="location" placeholder="Locations">
+                                        @for (item of screen.locations(); track $index) {
+                                            <mat-option [value]="item">{{ item }}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                    <mat-label>Landmarks</mat-label>
+                                    <mat-select formControlName="landmark" placeholder="Landmarks">
+                                        @for (item of screen.landmarks(); track $index) {
+                                            <mat-option [value]="item">{{ item }}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </form>
+    } @else {
+        <div class="d-flex flex-row pt-3 border-bottom">
+            <div class="d-flex flex-column p-3">
+                <h4 class="fs-4">{{ screen.selectedScreen()?.name }}</h4>
+                <p>{{ screen.selectedScreen()?.code }}</p>
+            </div>
+
+            <div class="spacer"></div>
+            <button [mat-menu-trigger-for]="editMenu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+            <mat-menu #editMenu="matMenu">
+                <button (click)="screen.onEditScreen(screenForm.value)" mat-menu-item>
+                    <mat-icon>edit</mat-icon> Edit
+                </button>
+            </mat-menu>
+        </div>
+        <div class="row g-3 my-1">
+            <div class="col-12">
+                <p matSubheader>Screen Device:</p>
+            </div>
+            <div class="col-6 border-end">
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.serial }}</div>
+                    <div matListItemMeta>Serial Number</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.ip }}</div>
+                    <div matListItemMeta>IP Address</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.network }}</div>
+                    <div matListItemMeta>Netwrok</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.temperature }}</div>
+                    <div matListItemMeta>Temperature</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.displayStatus }}</div>
+                    <div matListItemMeta>Display Status</div>
+                </mat-list-item>
+            </div>
+            <div class="col-6">
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.cpu }}</div>
+                    <div matListItemMeta>CPU</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.memory }}</div>
+                    <div matListItemMeta>Memory</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.storage }}</div>
+                    <div matListItemMeta>Storage</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.operatingSystem }}</div>
+                    <div matListItemMeta>OS</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="fw-bold" matListItemTitle>{{ screen.selectedScreen()?.others?.browser }}</div>
+                    <div matListItemMeta>Browser</div>
+                </mat-list-item>
+            </div>
+        </div>
+
+        <div class="row g-3 my-3">
+            <div class="col-12">
+                <p matSubheader>Geographical Location:</p>
+            </div>
+            <div class="col-6">
+                <div class="p-3 border rounded-2 d-flex flex-column justify-content-center align-items-center geographic">
+                    <mat-icon>location_pin</mat-icon>
+                    <h5 class="fs-5 mt-3">
+                        {{ screen.selectedScreen()?.geographic?.location }}
+                    </h5>
+                    <p class="fst-italic">Location</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="p-3 border rounded-2 d-flex flex-column justify-content-center align-items-center geographic">
+                    <mat-icon>flag</mat-icon>
+                    <h5 class="fs-5 mt-3">
+                        {{ screen.selectedScreen()?.geographic?.landmark }}
+                    </h5>
+                    <p class="fst-italic">Landmark</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="my-3">
+            <p matSubheader>Screen Address:</p>
+        </div>
+        <app-map [address]="screen.selectedScreen()?.address!" [editMode]="screen.isEditMode()" />
+        <div class="my-3 border-bottom">
+            <div class="row g-3">
+                <div class="d-flex flex-row col-12">
+                    <mat-icon>location_pin</mat-icon>
+                    <p>
+                        {{ screen.selectedScreen()?.address?.city }}, 
+                        {{ screen.selectedScreen()?.address?.state }},
+                        {{ screen.selectedScreen()?.address?.country }}
+                        {{ screen.selectedScreen()?.address?.zipCode }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <mat-list>
+            <mat-list-item class="text-bg-primary rounded-2">
+                <div class="text-bg-primary fw-bold" matListItemTitle>{{ screen.selectedScreen()?.caltonSerial }}</div>
+                <div class="text-bg-primary" matListItemMeta>Calton Serial No.</div>
+            </mat-list-item>
+        </mat-list>
+    }
+</div>  

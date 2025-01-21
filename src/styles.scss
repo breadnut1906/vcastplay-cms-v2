@@ -29,11 +29,11 @@ html {
     container-height: 10px
   ));
 
-  @include mat.button-overrides(( 
-    filled-container-color: #F58F20,
-    outlined-outline-color: #F58F20,
-    outlined-label-text-color: #F58F20
-  ));
+  // @include mat.button-overrides(( 
+  //   filled-container-color: #F58F20,
+  //   outlined-outline-color: #F58F20,
+  //   outlined-label-text-color: #F58F20
+  // ));
 
   .mat-drawer-container {
     height: calc(100vh - 64px);
@@ -61,6 +61,17 @@ html {
   padding-left: 8px;
 }
 
+.mat-mdc-row:hover {
+  background: var(--mat-sys-surface-container);
+}
+
+.header-title {
+
+  .mat-mdc-icon-button {
+    background-color:  var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+  }
+}
 
 /* Scrollbar effect */
 

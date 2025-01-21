@@ -16,7 +16,7 @@
 </mat-toolbar>
 
 <mat-drawer-container autosize>
-    <mat-drawer class="shadow rounded-0" #drawer [mode]="utility.isMobileSignal() ? 'over' : 'side'" [opened]="!utility.isMobileSignal()">
+    <mat-drawer class="shadow rounded-0" #drawer [mode]="utility.isMobileSignal() ? 'over' : 'side'" [opened]="!utility.isMobileSignal()" [autoFocus]="false">
         <div class="d-flex flex-column h-100">            
             <mat-nav-list class="mt-3 mb-auto" [ngClass]="{ 'ms-3': !isMinimized() || utility.isMobileSignal() }">
                 @for (item of menuItems(); track $index) {
@@ -28,6 +28,7 @@
                         [routerLink]="item.route" 
                         [ngClass]="{ 'p-0': isMinimized() && !utility.isMobileSignal() }" 
                         routerLinkActive="active"
+                        (click)="drawer.toggle()"
                     >
                         <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
                         @if (!isMinimized() || utility.isMobileSignal() ) { <div matListItemTitle>{{ item.text }}</div> }
@@ -43,6 +44,7 @@
                     [routerLink]="'/about'" 
                     [ngClass]="{ 'p-0': isMinimized() && !utility.isMobileSignal() }" 
                     routerLinkActive="active"
+                    (click)="drawer.toggle()"
                 >
                     <mat-icon matListItemIcon>info</mat-icon>
                     @if (!isMinimized() || utility.isMobileSignal()) { <div matListItemTitle>About</div> }

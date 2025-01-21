@@ -1,0 +1,15 @@
+.more-filters {
+    text-align: start;
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface-container);
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    max-width: 300px;
+    z-index: 2;
+    border-radius: 16px;
+
+    mat-icon {
+        cursor: move;
+    }
+}

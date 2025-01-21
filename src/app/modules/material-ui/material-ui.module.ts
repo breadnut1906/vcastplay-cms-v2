@@ -16,6 +16,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTimepickerModule } from '@angular/material/timepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -37,6 +41,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
+    MatChipsModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -46,9 +52,11 @@ import { MatSelectModule } from '@angular/material/select';
     MatSidenavModule,
     MatTableModule,
     MatTabsModule,
+    MatTimepickerModule,
     MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialUiModule { }

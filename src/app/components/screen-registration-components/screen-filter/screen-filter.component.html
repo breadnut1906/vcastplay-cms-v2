@@ -1,0 +1,82 @@
+<form class="row g-3 text-end position-relative" [formGroup]="filterForm">
+    <div class="col-12 col-md-5 col-lg-3">
+        <app-daterangepicker [(dateRangeValue)]="dateRangeValue" />
+    </div>
+    
+    <div class="col-10 col-md-6 col-lg-8">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input type="text" placeholder="Search keyword" formControlName="keyword" matInput>
+            <mat-icon matPrefix>search</mat-icon>
+            <button matSuffix mat-icon-button><mat-icon>close</mat-icon></button>
+        </mat-form-field>
+    </div>
+
+    <div class="col-2 col-md-1 col-lg-1">
+        <button (click)="showOthers.set(!showOthers())" matTooltip="More Filters" mat-mini-fab><mat-icon>{{ showOthers() ? 'close' : 'more_vert' }}</mat-icon></button>
+    </div>
+
+    @if (showOthers()) {
+        <div class="more-filters shadow p-2" cdkDrag>
+            <div class="d-flex flex-row border-bottom" matSubheader>
+                <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+                <p class="fs-6 mx-2">More Filters</p>
+            </div>
+            <div class="row g-3 m-2">
+                <div class="col-12">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-select formControlName="location" placeholder="Locations">
+                            <mat-option>--</mat-option>
+                            @for (location of screen.locations(); track $index) {
+                                <mat-option [value]="location">{{ location }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-select formControlName="group" placeholder="Groups">
+                            <mat-option>--</mat-option>
+                            @for (group of screen.groups(); track $index) {
+                                <mat-option [value]="group">{{ group }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-select formControlName="subGroup" placeholder="Sub-Groups">
+                            <mat-option>--</mat-option>
+                            @for (subSubGroup of screen.subSubGroups(); track $index) {
+                                <mat-option [value]="subSubGroup">{{ subSubGroup }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-select formControlName="type" placeholder="Types">
+                            <mat-option>--</mat-option>
+                            @for (type of screen.types(); track $index) {
+                                <mat-option [value]="type">{{ type }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-select formControlName="status" placeholder="Status">
+                            <mat-option>--</mat-option>
+                            @for (status of screen.statuses(); track $index) {
+                                <mat-option [value]="status">{{ status }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    }
+</form>

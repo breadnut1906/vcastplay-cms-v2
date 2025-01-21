@@ -1,4 +1,4 @@
-import { Component, effect, model } from '@angular/core';
+import { Component, model } from '@angular/core';
 import { MaterialUiModule } from '../../modules/material-ui/material-ui.module';
 import { FormControl } from '@angular/forms';
 import moment from 'moment';

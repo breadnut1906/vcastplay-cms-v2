@@ -26,7 +26,7 @@ export interface ScreenAddress {
 
 interface ScreeSchedule {
     type: string;
-    hours: string;
+    hours: { start: string; end: string; };
 }
 
 interface ScreenOrientation {
