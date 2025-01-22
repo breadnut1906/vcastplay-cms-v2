@@ -15,7 +15,7 @@
                 <h3 class="fs-4 me-auto">Screen registration</h3>
                 <div class="ms-auto">
                     @if (!utility.isMobileSignal()) {
-                        <button class="me-2" mat-flat-button>
+                        <button [mat-menu-trigger-for]="downloadApp" class="me-2" mat-flat-button>
                             <mat-icon>download</mat-icon> Download App
                         </button>
                         <button class="me-2" (click)="showFilter.set(!showFilter())" mat-flat-button>
@@ -25,7 +25,7 @@
                             <mat-icon>add</mat-icon> New
                         </button>
                     } @else {
-                        <button class="icon-button me-2" matTooltip="Download App" mat-icon-button><mat-icon>download</mat-icon></button>
+                        <!-- <button [mat-menu-trigger-for]="downloadApp" class="icon-button me-2" matTooltip="Download App" mat-icon-button><mat-icon>download</mat-icon></button> -->
                         <button class="icon-button me-2" (click)="showFilter.set(!showFilter())" matTooltip="Filter" mat-icon-button>
                             <mat-icon>{{ showFilter() ? 'close' : 'filter_alt' }}</mat-icon>
                         </button>
@@ -160,3 +160,8 @@
         }
     </div>
 </ng-template>
+
+<mat-menu #downloadApp="matMenu">
+    <button mat-menu-item><mat-icon>desktop_windows</mat-icon> Windows</button>
+    <button mat-menu-item><mat-icon>smartphone</mat-icon> Android</button>
+</mat-menu>

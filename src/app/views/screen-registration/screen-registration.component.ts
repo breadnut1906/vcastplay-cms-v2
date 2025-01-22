@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Screen } from '../../models/screen';
 import { UtilityService } from '../../services/utility.service';
 import { ComponentsModule } from '../../modules/components/components.module';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ScreenDetailsComponent } from '../../components/screen-registration-components/screen-details/screen-details.component';
 import { ScreenFilterComponent } from '../../components/screen-registration-components/screen-filter/screen-filter.component';
 

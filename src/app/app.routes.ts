@@ -22,6 +22,11 @@ export const routes: Routes = [
                 title: `${projectTitle} · Screen Registration`,
             },
             {
+                path: 'asset-library',
+                loadComponent: () => import('./views/asset-library/asset-library.component').then(m => m.AssetLibraryComponent),
+                title: `${projectTitle} · Asset Library`,
+            },
+            {
                 path: 'accounts',
                 loadComponent: () => import('./views/accounts/account-settings/account-settings.component').then(m => m.AccountSettingsComponent),
                 title: `${projectTitle} · Account Settings`,
