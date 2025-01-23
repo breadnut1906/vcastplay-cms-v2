@@ -180,7 +180,7 @@ export class AssetLibraryService {
     ]);    
   }
 
-  onEditAssets(asset: Assets) {
+  onEditAssets(asset: Assets) {    
     this.selectedAsset.set(asset);
     this.isEditMode.set(true);
     this.isDrawer.set(true);
@@ -202,8 +202,8 @@ export class AssetLibraryService {
     this.isDrawer.set(true);
   }
 
-  onSaveAssets() { 
-    console.log('Upload this to server: ', this.selectedAsset());
+  onSaveAssets(asset: Assets) { 
+    console.log('Upload this to server: ', asset);
     
     this.isDrawer.set(false);
     this.selectedAsset.set(null);

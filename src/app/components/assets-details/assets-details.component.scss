@@ -1,0 +1,9 @@
+.file-upload-container {
+    border: 2px dashed var(--mat-sys-primary);
+    border-radius: 11px;
+    padding: 5rem 25px;
+
+    input {
+        display: none;
+    }
+}

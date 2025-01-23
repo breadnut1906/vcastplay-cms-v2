@@ -1,0 +1,23 @@
+<div class="px-3 position-relative h-100">
+    @if (assetLibraryService.isViewMode()) {
+        <div class="py-3 border-bottom d-flex flex-row align-items-center">
+            <mat-card-title class="fw-semibold fs-5">{{ assetLibraryService.selectedAsset()?.name }}</mat-card-title>
+            <button class="ms-auto" (click)="assetLibraryService.onEditAssets(assetsForm.value)" mat-stroked-button><mat-icon>save</mat-icon> Save</button>
+        </div>
+    } @else {
+        <div class="py-3 border-bottom d-flex flex-row align-items-center">
+            <mat-card-title class="fw-semibold fs-5">{{ assetLibraryService.selectedAsset()?.name }}</mat-card-title>
+            <button class="ms-auto" (click)="assetLibraryService.onEditAssets(assetsForm.value)" mat-stroked-button><mat-icon>save</mat-icon> Save</button>
+        </div>
+
+        <form [formGroup]="assetsForm" class="row g-3 my-3">
+            <div class="col-12">
+                <div class="d-flex flex-column justify-content-center align-items-center file-upload-container" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
+                    <p>Drag and drop your image or video here, or</p>
+                    <button (click)="fileUpload.click()" mat-button>Browse File</button>
+                    <input #fileUpload type="file" name="file" id="file" (change)="onFileChange($event)">
+                </div>
+            </div>
+        </form>
+    }
+</div>

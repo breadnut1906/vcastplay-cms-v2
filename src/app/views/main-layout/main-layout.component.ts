@@ -34,14 +34,14 @@ export class MainLayoutComponent {
       route: '/asset-library',
     },
     {
-      text: 'Playlist',
-      icon: 'playlist_play',
-      route: '/playlist',
-    },
-    {
       text: 'Design Layout',
       icon: 'imagesearch_roller',
       route: '/design-layout',
+    },
+    {
+      text: 'Playlist',
+      icon: 'playlist_play',
+      route: '/playlist',
     },
     {
       text: 'Schedules',

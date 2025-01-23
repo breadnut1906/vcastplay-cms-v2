@@ -40,7 +40,13 @@ export class DashboardService {
   ])
 
   // List of widgets added to the dashboard
-  addedWidgets = signal<Widget[]>([]);
+  addedWidgets = signal<Widget[]>([
+    {
+      id: 1,
+      label: 'Online Screens',
+      content: OnlineScreenComponent
+    },
+  ]);
 
   // Show all available widgets that is not added to the dashboard
   widgetsToAdd = computed(() => {

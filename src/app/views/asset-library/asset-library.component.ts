@@ -4,13 +4,14 @@ import { MaterialUiModule } from '../../modules/material-ui/material-ui.module';
 import { UtilityService } from '../../services/utility.service';
 import { Assets } from '../../models/asset-library';
 import { MatTableDataSource } from '@angular/material/table';
+import { AssetsDetailsComponent } from '../../components/assets-details/assets-details.component';
 
 @Component({
   selector: 'app-asset-library',
-  imports: [ MaterialUiModule ],
+  imports: [ MaterialUiModule, AssetsDetailsComponent ],
   templateUrl: './asset-library.component.html',
   styleUrl: './asset-library.component.scss',
-  providers: [ AssetLibraryService, UtilityService ]
+  providers: [ AssetLibraryService, UtilityService, ]
 })
 export class AssetLibraryComponent {
 
@@ -24,10 +25,7 @@ export class AssetLibraryComponent {
   constructor() {
     effect(() => {
       this.assetLibraryService.onFetchAssets();
-      this.DATASOURCE.data = this.assetLibraryService.assets();
-
-      console.log(this.DATASOURCE.data);
-      
+      this.DATASOURCE.data = this.assetLibraryService.assets();      
     })
   }
 }
