@@ -20,6 +20,7 @@ import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
   declarations: [],
@@ -56,7 +57,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTreeModule,
   ]
 })
 export class MaterialUiModule { }

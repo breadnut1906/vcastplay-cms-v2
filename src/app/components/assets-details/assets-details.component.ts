@@ -1,8 +1,9 @@
-import { Component, effect, inject, viewChild } from '@angular/core';
+import { Component, effect, inject, signal, viewChild } from '@angular/core';
 import { AssetLibraryService } from '../../services/asset-library.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MaterialUiModule } from '../../modules/material-ui/material-ui.module';
 import { UtilityService } from '../../services/utility.service';
+import { Assets } from '../../models/asset-library';
 
 @Component({
   selector: 'app-assets-details',
@@ -16,6 +17,8 @@ export class AssetsDetailsComponent {
   utility = inject(UtilityService);
 
   fileUpload = viewChild.required<HTMLInputElement>('fileUpload');
+
+  details = signal<Assets | null>(null);
 
   assetsForm: FormGroup = new FormGroup({
     id: new FormControl(null),
@@ -42,8 +45,9 @@ export class AssetsDetailsComponent {
 
   constructor() { 
     effect(() => {
-      if(this.assetLibraryService.isEditMode()) {
+      if(this.assetLibraryService.isEditMode() || this.assetLibraryService.isViewMode()) {
         const data: any = this.assetLibraryService.selectedAsset();
+        this.details.set(data);        
         this.assetsForm.patchValue(data);   
       }
     })
@@ -51,6 +55,11 @@ export class AssetsDetailsComponent {
 
   ngOnInit() {
   
+  }
+
+  onClickSave(asset: Assets) {
+    this.assetLibraryService.onSaveAssets(asset);
+    this.assetsForm.reset();
   }
 
   onFileChange(event: Event) {

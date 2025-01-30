@@ -1,13 +1,12 @@
 <div class="px-3 position-relative h-100">
-    @if (assetLibraryService.isViewMode()) {
+    @if (!assetLibraryService.isViewMode()) {
         <div class="py-3 border-bottom d-flex flex-row align-items-center">
             <mat-card-title class="fw-semibold fs-5">{{ assetLibraryService.selectedAsset()?.name }}</mat-card-title>
-            <button class="ms-auto" (click)="assetLibraryService.onEditAssets(assetsForm.value)" mat-stroked-button><mat-icon>save</mat-icon> Save</button>
-        </div>
-    } @else {
-        <div class="py-3 border-bottom d-flex flex-row align-items-center">
-            <mat-card-title class="fw-semibold fs-5">{{ assetLibraryService.selectedAsset()?.name }}</mat-card-title>
-            <button class="ms-auto" (click)="assetLibraryService.onEditAssets(assetsForm.value)" mat-stroked-button><mat-icon>save</mat-icon> Save</button>
+            @if (utility.isMobileSignal()) {
+                <button class="ms-auto" (click)="onClickSave(assetsForm.value)" mat-icon-button><mat-icon>save</mat-icon></button>
+            } @else {
+                <button class="ms-auto" (click)="onClickSave(assetsForm.value)" mat-stroked-button><mat-icon>save</mat-icon> Save</button>
+            }
         </div>
 
         <form [formGroup]="assetsForm" class="row g-3 my-3">
@@ -19,5 +18,104 @@
                 </div>
             </div>
         </form>
+    } @else {
+        <div class="mb-3 py-3 border-bottom d-flex flex-row align-items-center">
+            <mat-card-title class="fw-semibold fs-5">{{ assetLibraryService.selectedAsset()?.name }}</mat-card-title>
+            @if (utility.isMobileSignal()) {
+                <button class="ms-auto" (click)="assetLibraryService.onEditAssets(assetsForm.value)" mat-icon-button>
+                    <mat-icon>edit</mat-icon>
+                </button>
+            } @else {
+                <button class="ms-auto" (click)="assetLibraryService.onEditAssets(assetsForm.value)" mat-stroked-button>
+                    <mat-icon>edit</mat-icon> Edit
+                </button>
+            }
+        </div>
+        <div class="d-flex flex-row">
+            <div class="file-container">
+                @switch (details()?.type) {
+                    @case('Images') {
+                        <img src="https://placehold.co/400x600/png" alt="Image">
+                    }
+                    @case('Videos') {
+                        <img src="https://placehold.co/600x400/png" alt="Video">
+                    }
+                    @default {
+                        <img src="https://placehold.co/100x50/png" alt="Audio">
+                    }
+                }
+            </div>
+            <div class="mx-3 ">
+                <p class="mb-3">Type: {{ details()?.type }}</p>
+                <mat-chip-set>
+                    <mat-chip>{{ details()?.category }}</mat-chip>
+                    <mat-chip>{{ details()?.subCategory }}</mat-chip>
+                </mat-chip-set>
+            </div>
+        </div>
+        <div class="row g-3 my-3">
+            <div class="col-4 p-3 border-end">
+                <p>Orientation:</p>
+                <div class="fw-semibold">{{ details()?.fileDetails?.orientation }}</div>
+            </div>
+            <div class="col-4 p-3 border-end">
+                <p>Resolution:</p>
+                <div class="fw-semibold">{{ details()?.fileDetails?.resolution }}</div>
+            </div>
+            <div class="col-4 p-3">
+                <p>File Size:</p>
+                <div class="fw-semibold">{{ details()?.fileDetails?.fileSize }}</div>
+            </div>
+        </div>
+
+        <mat-accordion class="mb-3">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Audience</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <h5 class="fs-5">{{ details()?.audience?.name }}</h5>
+                <div class="row g-3 mt-2">
+                    <div class="col-12">
+                        <p class="fst-italic">Demographics:</p>
+                        <div class="ms-5 mt-2 d-flex flex-row">
+                            <p>Age Group: <span class="fw-bold">{{ details()?.audience?.demographic?.ageGroup?.toUpperCase() }}</span></p>
+                            <p class="mx-3">Gender: <span class="fw-bold">{{ details()?.audience?.demographic?.gender?.toUpperCase() }}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="fst-italic">Temporal:</p>
+                        <div class="ms-5 mt-2 d-flex flex-row">
+                            <p>Duration: <span class="fw-bold">{{ details()?.audience?.temporal?.duration?.toUpperCase() }}</span></p>
+                            <p class="mx-3">Frequency: <span class="fw-bold">{{ details()?.audience?.temporal?.frequency?.toUpperCase() }}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="fst-italic">Geographic:</p>
+                        <div class="ms-5 mt-2 d-flex flex-row">
+                            <p>Location: <span class="fw-bold">{{ details()?.audience?.geographic?.location?.toUpperCase() }}</span></p>
+                            <p class="mx-3">Landmark: <span class="fw-bold">{{ details()?.audience?.geographic?.landmark?.toUpperCase() }}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Availability</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="p-3 d-flex flex-row">
+                    <h6>Status:</h6>
+                    <p class="ms-3">Activate/Deactivate</p>
+                </div>
+                <div class="p-3 d-flex flex-row">
+                    <h6>Date Range:</h6>
+                    <p class="ms-3">Date Range</p>
+                </div>
+                <div class="p-3 d-flex flex-row">
+                    <h6>Schedule:</h6>
+                    <p class="ms-3">Week Days (00:00 to 13:00)</p>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
     }
 </div>

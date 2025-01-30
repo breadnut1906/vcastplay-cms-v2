@@ -1,0 +1,80 @@
+<mat-drawer-container>
+    <mat-drawer
+        #drawerDetails 
+        class="shadow"
+        [ngStyle]="{ 'max-width': utility.isMobileSignal() ? '300px' : '600px' }"
+        [mode]="utility.isMobileSignal()? 'over' :'side'" 
+        position="end" 
+        [opened]="playlist.isDrawer()" 
+        (closedStart)="playlist.isDrawer.set(false)"
+    >
+        <app-playlist-details />
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="container-fluid">
+            <div class="d-flex flex-row my-3">
+                <h3 class="fs-4 me-auto">Playlist Library</h3>
+                <div class="ms-auto">
+                    @if (!utility.isMobileSignal()) {
+                        <button class="me-2" (click)="showFilter.set(!showFilter())" mat-flat-button>
+                            <mat-icon>{{ showFilter() ? 'close' : 'filter_alt' }}</mat-icon> Filter
+                        </button>
+                        <button (click)="playlist.onNewPlaylist()" mat-stroked-button>
+                            <mat-icon>add</mat-icon> New
+                        </button>
+                    } @else {
+                        <button class="icon-button me-2" matTooltip="Filter" (click)="showFilter.set(!showFilter())" mat-icon-button>
+                            <mat-icon>{{ showFilter()? 'close' : 'filter_alt' }}</mat-icon>
+                        </button>
+                        <button class="icon-button" matTooltip="New Playlist" (click)="playlist.onNewPlaylist()" mat-icon-button>
+                            <mat-icon>playlist_add</mat-icon>
+                        </button>
+                    }
+                </div>
+            </div>
+            @if (showFilter()) { <app-playlist-filter /> }
+
+            <table *ngIf="!utility.isMobileSignal(); else listView" mat-table [dataSource]="DATASOURCE" class="w-100 mt-3" [ngClass]="{ 'border-top': showFilter() }">
+                <ng-container matColumnDef="preview">
+                    <th mat-header-cell *matHeaderCellDef>Preview</th>
+                    <td class="p-2" mat-cell *matCellDef="let item">
+                        <img src="https://placehold.co/600x400/png" height="100" width="200" alt="Video">
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>Name</th>
+                    <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef>Type</th>
+                    <td mat-cell *matCellDef="let item">{{ item.type }}</td>
+                </ng-container>
+                <ng-container matColumnDef="lastUpdate">
+                    <th mat-header-cell *matHeaderCellDef>Last Update</th>
+                    <td mat-cell *matCellDef="let item">{{ item.lastUpdate }}</td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>Status</th>
+                    <td mat-cell *matCellDef="let item">{{ item.status }}</td>
+                </ng-container>
+                <ng-container matColumnDef="actions" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let item">
+                        <button mat-icon-button (click)="playlist.onEditPlaylist(item)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="playlist.onDeletePlaylist(item)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+<ng-template #listView>
+
+</ng-template>

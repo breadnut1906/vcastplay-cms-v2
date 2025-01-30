@@ -41,7 +41,7 @@ export class MainLayoutComponent {
     {
       text: 'Playlist',
       icon: 'playlist_play',
-      route: '/playlist',
+      route: '/playlists',
     },
     {
       text: 'Schedules',
@@ -66,5 +66,9 @@ export class MainLayoutComponent {
     } else {
       this.isMinimized.set(!this.isMinimized());
     }
+  }
+
+  onClickToggleDrawerNav() {
+    if (this.utility.isMobileSignal()) this.drawer().toggle();
   }
 }

@@ -1,7 +1,8 @@
 <mat-drawer-container autosize>
     <mat-drawer
         #drawerDetails 
-        class="sideNavDetails shadow"
+        class="shadow"
+        [ngStyle]="{ 'max-width': utility.isMobileSignal() ? '300px' : '600px' }"
         [mode]="utility.isMobileSignal()? 'over' :'side'" 
         position="end" 
         [opened]="screen.isDrawer()" 
@@ -86,7 +87,7 @@
                     <td mat-cell *matCellDef="let item">{{ item.status }}</td>
                 </ng-container>
 
-                <ng-container matColumnDef="actions">
+                <ng-container matColumnDef="actions" stickyEnd>
                     <th mat-header-cell *matHeaderCellDef>Actions</th>
                     <td mat-cell *matCellDef="let item">
                         <button (click)="screen.onViewScreen(item)" matTooltip="View Details" mat-icon-button><mat-icon>visibility</mat-icon></button>

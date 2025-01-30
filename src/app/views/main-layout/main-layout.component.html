@@ -28,6 +28,7 @@
                         [routerLink]="item.route" 
                         [ngClass]="{ 'p-0': isMinimized() && !utility.isMobileSignal() }" 
                         routerLinkActive="active"
+                        (click)="onClickToggleDrawerNav()"
                     >
                         <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
                         @if (!isMinimized() || utility.isMobileSignal() ) { <div matListItemTitle>{{ item.text }}</div> }
@@ -43,6 +44,7 @@
                     [routerLink]="'/settings'" 
                     [ngClass]="{ 'p-0': isMinimized() && !utility.isMobileSignal() }" 
                     routerLinkActive="active"
+                    (click)="onClickToggleDrawerNav()"
                 >
                     <mat-icon matListItemIcon>settings</mat-icon>
                     @if (!isMinimized() || utility.isMobileSignal()) { <div matListItemTitle>Settings</div> }
@@ -55,6 +57,7 @@
                     [routerLink]="'/about'" 
                     [ngClass]="{ 'p-0': isMinimized() && !utility.isMobileSignal() }" 
                     routerLinkActive="active"
+                    (click)="onClickToggleDrawerNav()"
                 >
                     <mat-icon matListItemIcon>info</mat-icon>
                     @if (!isMinimized() || utility.isMobileSignal()) { <div matListItemTitle>About</div> }

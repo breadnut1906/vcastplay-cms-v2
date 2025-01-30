@@ -18,6 +18,14 @@ interface FileDetails {
     fileSize: string
 }
 
+interface Schedule {
+    status: string; // (e.g., Available, Unavailable, On Demand)
+    dateRange: {
+        start: string; // ISO 8601 date format
+        end: string; // ISO 8601 date format
+    },
+    type: string; // (e.g., Week Days, Weekends, Monthly, Annually)
+}
 
 export interface Audience {
     id: number;

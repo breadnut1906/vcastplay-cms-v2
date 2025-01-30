@@ -27,6 +27,11 @@ export const routes: Routes = [
                 title: `${projectTitle} · Asset Library`,
             },
             {
+                path: 'playlists',
+                loadComponent: () => import('./views/playlists/playlists.component').then(m => m.PlaylistsComponent),
+                title: `${projectTitle} · Playlists`,
+            },
+            {
                 path: 'accounts',
                 loadComponent: () => import('./views/accounts/account-settings/account-settings.component').then(m => m.AccountSettingsComponent),
                 title: `${projectTitle} · Account Settings`,

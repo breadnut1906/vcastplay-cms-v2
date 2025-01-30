@@ -20,7 +20,6 @@ export class ScreenRegistrationComponent {
   screen = inject(ScreenService);
   utility = inject(UtilityService);
   showFilter = signal<boolean>(false);
-  panelOpenState = signal<boolean>(false);
 
   displayColumns: string[] = [ 'code', 'name', 'type', 'orientation', 'group', 'subGroup', 'lastUpdate', 'status', 'actions'];
   SCREEN_DATASOURCE: MatTableDataSource<Screen> = new MatTableDataSource<Screen>();

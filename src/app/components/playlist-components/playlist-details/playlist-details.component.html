@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <!-- header -->
+    <div class="d-flex flex-row mt-2">
+        <h6>{{ playlist.isEditMode() ? 'Edit Playlist' : 'Create New Playlist' }}</h6>
+        <button class="ms-auto" (click)="playlist.onCancelPlaylist()" mat-icon-button><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="row g-3 mt-3 border-top align-items-stretch" cdkDropListGroup>
+        <div class="col-12 col-md-6">
+            <div class="p-3" cdkDropList>
+                @for (item of assetLists; track $index) {
+                    <mat-card class="rounded-0 mb-3" cdkDrag>
+                        <mat-card-header>
+                            <mat-card-title>{{ item.name }}</mat-card-title>
+                        </mat-card-header>
+                    </mat-card>
+                }
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="p-3 border rounded" cdkDropList [cdkDropListData]="contents?.value" (cdkDropListDropped)="onDropNewPlayList($event)">
+                @for (item of contents?.value; track $index) {
+                    <mat-card class="rounded-0 mb-3">
+                        <mat-card-header>
+                            <mat-card-title>{{ item.name }}</mat-card-title>
+                        </mat-card-header>
+                    </mat-card>
+                }
+            </div>
+        </div>
+    </div>
+</div>
