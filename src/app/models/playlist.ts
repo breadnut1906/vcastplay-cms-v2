@@ -11,6 +11,7 @@ export interface Playlist {
         speed: number; // seconds
     },
     contents?: Array<PlaylistContent>;
+    duration: number; // seconds
     status: string; // (e.g., Active, Inactive)
     createdOn: string; // ISO 8601 date format
     lastUpdate: string; // ISO 8601 date format

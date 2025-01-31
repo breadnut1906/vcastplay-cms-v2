@@ -27,6 +27,7 @@ export class PlaylistService {
           speed: 1
         },
         contents: [],
+        duration: 0,
         createdOn: '2022-01-01T00:00:00Z',
         status: 'Active',
         lastUpdate: '2022-01-01T00:00:00Z',

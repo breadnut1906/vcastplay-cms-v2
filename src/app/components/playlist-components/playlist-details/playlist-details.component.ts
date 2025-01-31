@@ -1,12 +1,12 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, ElementRef, inject, viewChild } from '@angular/core';
 import { PlaylistService } from '../../../services/playlist.service';
 import { AssetLibraryService } from '../../../services/asset-library.service';
 import { MaterialUiModule } from '../../../modules/material-ui/material-ui.module';
 import { Assets } from '../../../models/asset-library';
-import { FormControl, FormGroup } from '@angular/forms';
-import { PlaylistContent } from '../../../models/playlist';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-
+import { PlaylistContent } from '../../../models/playlist';
+import { UtilityService } from '../../../services/utility.service';
 @Component({
   selector: 'app-playlist-details',
   imports: [ MaterialUiModule ],
@@ -17,8 +17,11 @@ export class PlaylistDetailsComponent {
 
   playlist = inject(PlaylistService);
   assets = inject(AssetLibraryService);
+  utiliy = inject(UtilityService);
 
   assetLists: Assets[] = [];
+
+  filterAssets: FormControl = new FormControl(null);
 
   playListForm: FormGroup = new FormGroup({
     id: new FormControl(0),
@@ -30,7 +33,8 @@ export class PlaylistDetailsComponent {
       type: new FormControl(''),
       speed: new FormControl(0),
     }),
-    contents: new FormControl<PlaylistContent[]>([]),
+    contents: new FormControl<Array<PlaylistContent[]>>([], [ Validators.required ]),
+    duration: new FormControl(0),
     status: new FormControl(''),
     createdOn: new FormControl(''),
     lastUpdate: new FormControl(''),
@@ -41,25 +45,64 @@ export class PlaylistDetailsComponent {
 
       // Create new playlist
       if (!this.playlist.isEditMode()) {  
-        const assets = this.assets.assets();
+        const assets = this.assets.filteredAssets();        
         this.assetLists = assets;
       }
+
+      this.filterAssets.valueChanges.subscribe((filter) => {
+        this.assets.assetFilters.set({ type: filter });
+        this.assetLists = this.assets.filteredAssets();
+      });
     })
   }
 
-  ngOnInit() {this.assets.onFetchAssets();
+  ngOnInit() {
+    this.assets.onFetchAssets();
+  }
+
+  ngAfterViewInit() {
+    
   }
 
   onClickSave() {
-    this.playlist.onSavePlaylist();
+    // this.playlist.onSavePlaylist();
+    console.log(this.playListForm.value);
+  }
+  
+  onClickReset() {
+    this.playListForm.reset();
+    console.log(this.playListForm.value);
+    this.contents?.patchValue([])
+  }
+
+  onStartDrag(event: CdkDragDrop<any[]>) { 
+    const { previousContainer } = event;
+    previousContainer.data = [ ...this.assetLists ];
   }
   
   onDropNewPlayList(event: CdkDragDrop<any[]>) {
-    const { previousContainer, container, previousIndex, currentIndex } = event;    
+    const { previousContainer, container, previousIndex, currentIndex, item } = event;
+
     if (previousContainer === container) {
       moveItemInArray(container.data, previousIndex, currentIndex);
     } else {
-      transferArrayItem(previousContainer.data, container.data, previousIndex, currentIndex);
+      
+      // Check if asset already exists in playlist
+      if (this.contents?.value.find((a: any) => a.content.id == item.data.id)) {
+        this.utiliy.onShowNotification('Asset already exists in playlist.', '', 'error');
+        return;
+      }
+
+      // Add new asset to playlist
+      const newContent: PlaylistContent = { content: item.data, duration: 0 };
+      this.contents?.value.push(newContent);
+    }
+  }
+
+  onRemoveAsset(asset: Assets) {
+    const index = this.contents?.value.findIndex((a: any) => a.id == asset.id);
+    if (index!== -1) {
+      this.contents?.value.splice(index, 1);
     }
   }
 

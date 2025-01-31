@@ -2,8 +2,7 @@
     <mat-drawer
         #drawerDetails 
         class="shadow"
-        [ngStyle]="{ 'max-width': utility.isMobileSignal() ? '300px' : '600px' }"
-        [mode]="utility.isMobileSignal()? 'over' :'side'" 
+        mode="over"
         position="end" 
         [opened]="playlist.isDrawer()" 
         (closedStart)="playlist.isDrawer.set(false)"

@@ -21,6 +21,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -59,6 +60,7 @@ import { MatTreeModule } from '@angular/material/tree';
     ReactiveFormsModule,
     MatNativeDateModule,
     MatTreeModule,
+    MatSlideToggleModule,
   ]
 })
 export class MaterialUiModule { }

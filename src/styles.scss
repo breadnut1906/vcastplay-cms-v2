@@ -4,6 +4,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use "leaflet/dist/leaflet.css";
 @use 'bootstrap/scss/bootstrap';
+@use 'ngx-toastr/toastr';
 @use '@angular/material' as mat;
 
 html, body { height: 100%; }
@@ -21,7 +22,10 @@ html {
       primary: mat.$blue-palette,
       tertiary: mat.$orange-palette,
     ),
-    typography: Roboto,
+    typography: (
+      // use-roboto: true,
+      use-system-variables: true, // Enable system variables for typography
+    ),
     density: 0,
   ));
 
@@ -58,12 +62,6 @@ html {
 
 .spacer {
   flex: 1 1 auto;
-}
-
-.cdk-drop-list-dragging {
-  opacity: 0.5;
-  border-left: 2px solid #000;
-  padding-left: 8px;
 }
 
 .mat-mdc-row:hover {

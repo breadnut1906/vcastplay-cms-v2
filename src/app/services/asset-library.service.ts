@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Assets } from '../models/asset-library';
 
 @Injectable()
@@ -9,9 +9,21 @@ export class AssetLibraryService {
   isViewMode = signal<boolean>(false);
 
   assets = signal<Assets[]>([]);
-  screeFilters = signal<any>({});
+  assetFilters = signal<any>({});
 
   selectedAsset = signal<Assets | null>(null);
+
+  filteredAssets = computed(() => {
+    const { assetFilters } = this;
+    const { code, name, type, category, subCategory, audience, availability, lastUpdate } = assetFilters();
+    return this.assets().filter(asset => {
+      return (
+        (!code || asset.code.toLowerCase().includes(code.toLowerCase())) &&
+        (!name || asset.name.toLowerCase().includes(name.toLowerCase())) &&
+        (!type || asset.type.toLowerCase().includes(type.toLowerCase()))
+      );
+    });
+  });
 
   constructor() { }
 

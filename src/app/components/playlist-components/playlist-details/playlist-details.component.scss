@@ -1,0 +1,36 @@
+.empty-text, h6, p {
+    font-size: var(--mat-sys-body-small-size) !important;
+}
+
+.asset-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--mat-sys-tertiary-container);
+    color: var(--mat-sys-on-tertiary-container);
+    cursor: grab;
+}
+
+.playlist-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    button {
+        width: 100%;
+    }
+}
+
+.file-upload-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed var(--mat-sys-primary);
+    border-radius: 11px;
+    padding: 5rem 25px;
+}
+
+.duration-input::-webkit-datetime-edit-ampm-field {
+    display: none;
+}
