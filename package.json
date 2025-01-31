@@ -24,6 +24,7 @@
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.7",
     "daterangepicker": "^3.1.0",
+    "html-duration-picker": "^2.4.0",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "moment": "^2.30.1",

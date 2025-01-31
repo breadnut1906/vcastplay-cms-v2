@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { PlaylistContent } from '../../../models/playlist';
 import { UtilityService } from '../../../services/utility.service';
+import * as HtmlDurationPicker from 'html-duration-picker';
 @Component({
   selector: 'app-playlist-details',
   imports: [ MaterialUiModule ],
@@ -25,16 +26,16 @@ export class PlaylistDetailsComponent {
 
   playListForm: FormGroup = new FormGroup({
     id: new FormControl(0),
-    name: new FormControl(''),
-    description: new FormControl(''),
-    type: new FormControl(''),
+    name: new FormControl('', [ Validators.required ]),
+    description: new FormControl('', [ Validators.required ]),
+    isManual: new FormControl(false),
     transition: new FormGroup({
       isBlackGap: new FormControl(false),
-      type: new FormControl(''),
-      speed: new FormControl(0),
+      type: new FormControl('', [ Validators.required ]),
+      speed: new FormControl(0, [ Validators.required ]),
     }),
     contents: new FormControl<Array<PlaylistContent[]>>([], [ Validators.required ]),
-    duration: new FormControl(0),
+    duration: new FormControl(0, [ Validators.required ]),
     status: new FormControl(''),
     createdOn: new FormControl(''),
     lastUpdate: new FormControl(''),
@@ -61,10 +62,14 @@ export class PlaylistDetailsComponent {
   }
 
   ngAfterViewInit() {
-    
+    HtmlDurationPicker.init();
   }
 
   onClickSave() {
+    if (this.playListForm.invalid) {
+      this.utiliy.onShowNotification('Please fill out all required fields.', '', 'error');
+      return;
+    }
     // this.playlist.onSavePlaylist();
     console.log(this.playListForm.value);
   }
@@ -72,6 +77,12 @@ export class PlaylistDetailsComponent {
   onClickReset() {
     this.playListForm.reset();
     console.log(this.playListForm.value);
+    this.contents?.patchValue([])
+  }
+
+  onClickCancel() {
+    this.playlist.onCancelPlaylist();
+    this.playListForm.reset();
     this.contents?.patchValue([])
   }
 
@@ -108,5 +119,9 @@ export class PlaylistDetailsComponent {
 
   get contents() {
     return this.playListForm.get('contents');
+  }
+
+  get type() {
+    return this.playListForm.get('type');
   }
 }

@@ -1,3 +1,8 @@
+:host {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
 .empty-text, h6, p {
     font-size: var(--mat-sys-body-small-size) !important;
 }
@@ -29,8 +34,4 @@
     border: 2px dashed var(--mat-sys-primary);
     border-radius: 11px;
     padding: 5rem 25px;
-}
-
-.duration-input::-webkit-datetime-edit-ampm-field {
-    display: none;
 }

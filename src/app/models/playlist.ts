@@ -4,13 +4,14 @@ export interface Playlist {
     id: number;
     name: string;
     description: string;
-    type: string; // (e.g., Manual, Auto-Based on Tag)
+    isManual: boolean;
     transition: {
         isBlackGap: boolean;
         type: string; // (e.g., fade, crossfade, slide),
         speed: number; // seconds
     },
     contents?: Array<PlaylistContent>;
+    tag: string;
     duration: number; // seconds
     status: string; // (e.g., Active, Inactive)
     createdOn: string; // ISO 8601 date format

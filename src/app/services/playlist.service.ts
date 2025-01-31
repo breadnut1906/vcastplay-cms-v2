@@ -20,13 +20,14 @@ export class PlaylistService {
         id: 1,
         name: 'New Playlist',
         description: 'This is a new playlist',
-        type: 'Manual',
+        isManual: false,
         transition: {
           isBlackGap: true,
           type: 'fade',
           speed: 1
         },
         contents: [],
+        tag: '',
         duration: 0,
         createdOn: '2022-01-01T00:00:00Z',
         status: 'Active',

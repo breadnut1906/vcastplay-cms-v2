@@ -81,6 +81,18 @@ html {
   min-width: 600px;
 }
 
+.html-duration-picker {
+  padding: 0 !important;
+}
+
+.html-duration-picker-input-controls-wrapper {
+  width: 100% !important;
+
+  .controls {
+    visibility: hidden !important;
+  }
+}
+
 /* Scrollbar effect */
 
 ::-webkit-scrollbar {
