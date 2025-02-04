@@ -32,6 +32,11 @@ export const routes: Routes = [
                 title: `${projectTitle} · Playlists`,
             },
             {
+                path: 'design-editor',
+                loadComponent: () => import('./views/design-editor/design-editor.component').then(m => m.DesignEditorComponent),
+                title: `${projectTitle} · Design Editor`,
+            },
+            {
                 path: 'accounts',
                 loadComponent: () => import('./views/accounts/account-settings/account-settings.component').then(m => m.AccountSettingsComponent),
                 title: `${projectTitle} · Account Settings`,

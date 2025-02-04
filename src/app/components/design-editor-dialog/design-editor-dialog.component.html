@@ -1,0 +1,39 @@
+<h4 mat-dialog-title class="fs-4">New Template</h4>
+<mat-dialog-content>
+    <form class="row g-3" [formGroup]="templateForm">
+        <mat-form-field class="col-12" appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Template Name</mat-label>
+            <input type="text" formControlName="name" matInput>
+            <!-- <mat-error *ngIf="controls.get('name').hasError('required')">Canvas name is required.</mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col-12" appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Template Description</mat-label>
+            <textarea formControlName="description" [rows]="6" matInput></textarea>
+            <!-- <mat-error *ngIf="controls.get('description').hasError('required')">Canvas description is required.</mat-error> -->
+        </mat-form-field>
+        
+        <mat-form-field class="col-12" appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Orientation</mat-label>
+            <mat-select formControlName="orientation">
+                <mat-option value="Landscape">Landscape</mat-option>
+                <mat-option value="Portrait">Portrait</mat-option>                
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12" appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Resolution</mat-label>
+            <mat-select formControlName="canvas">
+                @for (item of resolutions; track $index) {
+                    <mat-option [value]="{ width: item.width, height: item.height }">
+                        <span class="mat-caption">{{ item.name }}</span> {{ item.width }}x{{ item.height }}
+                    </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button (click)="onClickCancel()" mat-button>Cancel</button>
+    <button (click)="onCreateNewCanvas()" mat-button [mat-dialog-close]="templateForm.value" color="primary">Create Canvas</button>
+</mat-dialog-actions>

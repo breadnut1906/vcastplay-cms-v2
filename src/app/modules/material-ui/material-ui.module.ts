@@ -22,6 +22,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 @NgModule({
   declarations: [],
@@ -61,6 +63,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatNativeDateModule,
     MatTreeModule,
     MatSlideToggleModule,
+    MatDialogModule,
+    CdkMenuModule,
   ]
 })
 export class MaterialUiModule { }

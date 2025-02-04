@@ -34,9 +34,9 @@ export class MainLayoutComponent {
       route: '/asset-library',
     },
     {
-      text: 'Design Layout',
+      text: 'Design Editor',
       icon: 'imagesearch_roller',
-      route: '/design-layout',
+      route: '/design-editor',
     },
     {
       text: 'Playlist',

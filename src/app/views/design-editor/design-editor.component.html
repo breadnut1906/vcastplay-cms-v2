@@ -1,0 +1,97 @@
+<mat-drawer-container>
+    <mat-drawer #drawer mode="side" position="end" opened>
+        <mat-tab-group>
+            <mat-tab label="Assets">List of assets</mat-tab>
+            <mat-tab label="Templates">Lists of Templates</mat-tab>
+        </mat-tab-group>
+        <!-- <div class="position-absolute top-50">
+            <button (click)="drawer.toggle()" mat-icon-button><mat-icon>chevron_left</mat-icon></button>
+        </div> -->
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="editor">
+            <div class="editor-controls">
+                <!-- <button (click)="onClickAddLayer()" mat-button>Add Layer</button>
+                <button (click)="onClickSaveTemplate()" mat-button>Save Template</button> -->
+                <button class="menu-item" [mat-menu-trigger-for]="file">File</button>
+                <button class="menu-item" [mat-menu-trigger-for]="edit" [disabled]="!editor.template()">Edit</button>
+            </div>
+
+            <div #editorContent class="editor-content"  (wheel)="onMouseWheel($event)">
+                @if (editor.template()) {
+                    <div 
+                        class="screen-container mat-elevation-z3 shadow rounded-3"
+                        [style.width.px]="templateData.canvas.width" 
+                        [style.height.px]="templateData.canvas.height"
+                        [style.transform]="'scale(' + templateData.zoomScale + ')'"
+                        [style.transformOrigin]="'center center'">
+                        @for (layer of templateData.layers; track $index) {
+                            <div 
+                                [id]="$index" 
+                                class="layer-content" 
+                                [ngClass]="'layer-content' + ($index + 1)" 
+                                [style]="'top: '+ layer.top +'px; left: '+ layer.left +'px;'"
+                            >
+                                Layer {{ $index + 1 }}
+                            </div>
+                        }
+                        <ngx-moveable 
+                            #moveableRef
+                            [target]="targets"
+                            [draggable]="true"
+                            [resizable]="true"
+                            [rotatable]="true"
+                            [scalable]="true"
+                            [snappable]="true"
+        
+                            [snapGap]="true"
+                            [snapDirections]="snapDirections"
+                            [elementSnapDirections]="elementSnapDirections"
+                            [isDisplaySnapDigit]="true"
+                            [isDisplayInnerSnapDigit]="false"
+                            [elementGuidelines]="elementGuidelines"
+                            [snapThreshold]="null"
+                            [maxSnapElementGuidelineDistance]="null"
+        
+                            [maxSnapElementGuidelineDistance]="100"
+                            [maxSnapElementGapDistance]="80"
+        
+                            [bounds]="bounds"
+
+                            (render)="onRenderScreen($event)"
+                            (renderGroup)="onRenderGroup($event)"
+                            (drag)="onDrag($event)"
+                            (bound)="onBound($event)"
+                        />
+                    </div>
+                }
+            </div>
+            
+            <ngx-selecto 
+                [dragContainer]="editorContent"
+                [selectableTargets]="['.layer-content']"
+                [hitRate]="0"
+                [selectByClick]="true"
+                [selectFromInside]="true"
+                [toggleContinueSelect]="['shift']"
+                [ratio]="0"
+                (dragStart)="onDragStart($event)"
+                (selectEnd)="onSelectEnd($event)"
+            />
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+<mat-menu #file="matMenu">
+    <button (click)="onClickNewCanvas(canvaConfig)" mat-menu-item>New</button>
+    <button (click)="onClickSaveTemplate()" mat-menu-item>Save</button>
+</mat-menu>
+
+<mat-menu #edit="matMenu">
+    <button (click)="onClickAddLayer()" mat-menu-item>New Layer</button>
+    <button mat-menu-item>Align</button>
+</mat-menu>
+
+<ng-template #canvaConfig>
+    <app-design-editor-dialog />
+</ng-template>
