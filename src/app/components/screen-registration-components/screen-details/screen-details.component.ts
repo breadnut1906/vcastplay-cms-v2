@@ -33,7 +33,10 @@ export class ScreenDetailsComponent {
     subGroup: new FormControl(''),
     orientation: new FormGroup({
       orientation: new FormControl(''),
-      resolution: new FormControl(''),
+      resolution: new FormGroup({
+        width: new FormControl(0),
+        height: new FormControl(0),
+      }),
     }),
     schedule: new FormGroup({
       type: new FormControl(''),

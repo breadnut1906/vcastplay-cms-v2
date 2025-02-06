@@ -3,9 +3,10 @@
         #drawerDetails 
         class="shadow"
         [ngStyle]="{ 'max-width': utility.isMobileSignal() ? '350px' : '600px' }"
-        [mode]="utility.isMobileSignal()? 'over' :'side'" 
+        mode="over"
         position="end" 
         [opened]="assetLibraryService.isDrawer()" 
+        (closedStart)="assetLibraryService.isDrawer.set(false)"
     >
         <app-assets-details></app-assets-details>
     </mat-drawer>

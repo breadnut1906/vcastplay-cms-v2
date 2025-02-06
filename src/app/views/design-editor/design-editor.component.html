@@ -17,14 +17,16 @@
                 <button class="menu-item" [mat-menu-trigger-for]="edit" [disabled]="!editor.template()">Edit</button>
             </div>
 
-            <div #editorContent class="editor-content"  (wheel)="onMouseWheel($event)">
+            <div #workspace class="workspace">
                 @if (editor.template()) {
+                    
+                    <!-- [style.transform]="'scale(' + templateData.zoomScale + ')'" -->
                     <div 
                         class="screen-container mat-elevation-z3 shadow rounded-3"
-                        [style.width.px]="templateData.canvas.width" 
-                        [style.height.px]="templateData.canvas.height"
-                        [style.transform]="'scale(' + templateData.zoomScale + ')'"
-                        [style.transformOrigin]="'center center'">
+                        [style.width.px]="templateData.orientation.resolution.width" 
+                        [style.height.px]="templateData.orientation.resolution.height"
+                        [style.transform]="'scale(' + templateData.zoomScale + ')'" 
+                        [style.transformOrigin]="'center center'" >
                         @for (layer of templateData.layers; track $index) {
                             <div 
                                 [id]="$index" 
@@ -68,7 +70,7 @@
             </div>
             
             <ngx-selecto 
-                [dragContainer]="editorContent"
+                [dragContainer]="workspace"
                 [selectableTargets]="['.layer-content']"
                 [hitRate]="0"
                 [selectByClick]="true"

@@ -6,7 +6,7 @@
     align-items: center;
     height: 100%;
     background-color: var(--mat-sys-surface-dim);
-    background-image: radial-gradient(black 1px, transparent 0);
+    background-image: radial-gradient(#161616 1px, transparent 0);
     background-size: 40px 40px;
     background-position: -19px -19px;
     overflow: auto;
@@ -30,7 +30,7 @@
         }
     }
 
-    .editor-content { 
+    .workspace { 
         height: 100%;
         width: 100%;
         overflow: auto;

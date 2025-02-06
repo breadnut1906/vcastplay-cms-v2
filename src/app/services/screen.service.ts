@@ -20,7 +20,7 @@ export class ScreenService {
     subSubGroups = computed(() => [ ...new Set(this.screens().map(s => s.subGroup)) ]);
     types = computed(() => [ ...new Set(this.screens().map(s => s.type)) ]);
     statuses = computed(() => [ ...new Set(this.screens().map(s => s.status)) ]);
-
+    
     constructor() {  }
 
     onFetchScreens() {        
@@ -41,8 +41,11 @@ export class ScreenService {
                 group: "GroupA",
                 subGroup: "SubGroup1",
                 orientation: {
-                    orientation: "Horizontal",
-                    resolution: "1920x1080",
+                    orientation: "Landscape",
+                    resolution: {
+                        width: 1920,
+                        height: 1080,
+                    },
                 },
                 schedule: {
                     type: "Always On",
@@ -84,8 +87,11 @@ export class ScreenService {
                 group: "GroupB",
                 subGroup: "SubGroup2",
                 orientation: {
-                    orientation: "Vertical",
-                    resolution: "1080x1920",
+                    orientation: "Portrait",
+                    resolution: {
+                        width: 1080,
+                        height: 1920,
+                    },
                 },
                 schedule: {
                     type: "Week Days",
@@ -127,8 +133,11 @@ export class ScreenService {
                 group: "GroupC",
                 subGroup: "SubGroup3",
                 orientation: {
-                    orientation: "Horizontal",
-                    resolution: "2560x1440",
+                    orientation: "Landscape",
+                    resolution: {
+                        width: 2560,
+                        height: 1440,
+                    },
                 },
                 schedule: {
                     type: "Always On",
@@ -170,8 +179,11 @@ export class ScreenService {
                 group: "GroupD",
                 subGroup: "SubGroup4",
                 orientation: {
-                    orientation: "Vertical",
-                    resolution: "1440x2560",
+                    orientation: "Portrait",
+                    resolution: {
+                        width: 1440,
+                        height: 2560,
+                    },
                 },
                 schedule: {
                     type: "Week Days",
@@ -213,8 +225,11 @@ export class ScreenService {
                 group: "GroupE",
                 subGroup: "SubGroup5",
                 orientation: {
-                    orientation: "Horizontal",
-                    resolution: "3840x2160",
+                    orientation: "Landscape",
+                    resolution: {
+                        width: 3840,
+                        height: 2160,
+                    },
                 },
                 schedule: {
                     type: "Always On",
@@ -240,6 +255,144 @@ export class ScreenService {
                 status: "Active",
                 lastUpdate: "2025-01-20T09:00:00Z",
             },
+            {
+                id: 6,
+                code: "SCR006",
+                name: "Union Square Display",
+                type: "Windows",
+                address: {
+                    city: "San Francisco",
+                    state: "CA",
+                    country: "USA",
+                    zipCode: "94102",
+                    lat: 37.7881,
+                    lng: -122.4075
+                },
+                group: "GroupF",
+                subGroup: "SubGroup1",
+                orientation: {
+                    orientation: "Portrait",
+                    resolution: {
+                        width: 1080,
+                        height: 1920
+                    }
+                },
+                schedule: {
+                    type: "Business Hours",
+                    hours: { start: "08:00", end: "18:00" }
+                },
+                geographic: {
+                    location: "Regional",
+                    landmark: "Union Square"
+                },
+                caltonSerial: "CS123456",
+                others: {
+                    serial: "SER006",
+                    ip: "192.168.1.6",
+                    cpu: "Intel Core i5",
+                    memory: "16GB",
+                    storage: "512GB SSD",
+                    operatingSystem: "Windows 10",
+                    network: "Wi-Fi",
+                    temperature: "22°C",
+                    browser: "Chrome",
+                    displayStatus: "Active"
+                },
+                status: "Active",
+                lastUpdate: "2025-01-22T10:00:00Z"
+            },
+            {
+                id: 7,
+                code: "SCR007",
+                name: "Coffee Shop Display",
+                type: "Windows",
+                address: {
+                    city: "San Francisco",
+                    state: "CA",
+                    country: "USA",
+                    zipCode: "94103",
+                    lat: 37.7742,
+                    lng: -122.4108
+                },
+                group: "GroupG",
+                subGroup: "SubGroup2",
+                orientation: {
+                    orientation: "Portrait",
+                    resolution: {
+                        width: 720,
+                        height: 1280
+                    }
+                },
+                schedule: {
+                    type: "Limited Hours",
+                    hours: { start: "09:00", end: "17:00" }
+                },
+                geographic: {
+                    location: "Local",
+                    landmark: "Coffee Hub"
+                },
+                caltonSerial: "CS654321",
+                others: {
+                    serial: "SER007",
+                    ip: "192.168.1.7",
+                    cpu: "Intel Celeron",
+                    memory: "4GB",
+                    storage: "128GB SSD",
+                    operatingSystem: "Windows 10 IoT",
+                    network: "Wi-Fi",
+                    temperature: "24°C",
+                    browser: "Edge",
+                    displayStatus: "Active"
+                },
+                status: "Active",
+                lastUpdate: "2025-01-25T11:00:00Z"
+            },
+            {
+                id: 8,
+                code: "SCR008",
+                name: "Mini Kiosk Display",
+                type: "Windows",
+                address: {
+                    city: "San Francisco",
+                    state: "CA",
+                    country: "USA",
+                    zipCode: "94104",
+                    lat: 37.7929,
+                    lng: -122.4017
+                },
+                group: "GroupH",
+                subGroup: "SubGroup3",
+                orientation: {
+                    orientation: "Landscape",
+                    resolution: {
+                        width: 1280,
+                        height: 720
+                    }
+                },
+                schedule: {
+                    type: "Custom",
+                    hours: { start: "10:00", end: "20:00" }
+                },
+                geographic: {
+                    location: "Local",
+                    landmark: "Downtown Mall"
+                },
+                caltonSerial: "CS111222",
+                others: {
+                    serial: "SER008",
+                    ip: "192.168.1.8",
+                    cpu: "Intel Atom",
+                    memory: "2GB",
+                    storage: "64GB eMMC",
+                    operatingSystem: "Windows 10 IoT",
+                    network: "Wi-Fi",
+                    temperature: "23°C",
+                    browser: "Firefox",
+                    displayStatus: "Active"
+                },
+                status: "Active",
+                lastUpdate: "2025-01-28T15:00:00Z"
+            },            
         ])
     }
 

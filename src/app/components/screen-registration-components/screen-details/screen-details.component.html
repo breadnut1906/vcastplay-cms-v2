@@ -82,20 +82,34 @@
                                     <mat-label>Orientation</mat-label>
                                     <mat-select formControlName="orientation" placeholder="Orientation">
                                         <mat-option>--</mat-option>
-                                        <mat-option value="Horizontal">Horizontal</mat-option>
-                                        <mat-option value="Vertical">Vertical</mat-option>
+                                        <mat-option value="Landscape">Landscape</mat-option>
+                                        <mat-option value="Portrait">Portrait</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-12">
-                                <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                                    <mat-label>Resolution</mat-label>
-                                    <mat-select formControlName="resolution" placeholder="Resolution">
-                                        @for (item of screen.resolutions(); track $index) {
-                                            <mat-option [value]="item">{{ item }}</mat-option>
-                                        }
-                                    </mat-select>
-                                </mat-form-field>
+                            <div class="col-12 row g-3" formGroupName="resolution">
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                         <mat-label>Width</mat-label>
+                                         <input type="number" [min]="640" formControlName="width" matInput>
+                                         <!-- <mat-hint>in inches</mat-hint>
+                                         <mat-error *ngIf="screenForm.get('resolution.width')?.hasError('required')">Width is required.</mat-error>
+                                         <mat-error *ngIf="screenForm.get('resolution.width')?.hasError('min')">Width must be greater than or equal to 1.</mat-error>
+                                         <mat-error *ngIf="screenForm.get('resolution.width')?.hasError('max')">Width must be less than or equal to 100.</mat-error>
+                                         <mat-error *ngIf="screenForm.get('resolution.width')?.hasError('pattern')">Width must be a number.</mat-error> -->
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                         <mat-label>Height</mat-label>
+                                         <input type="number" [min]="480" formControlName="height" matInput>
+                                         <!-- <mat-hint>in inches</mat-hint>
+                                           <mat-error *ngIf="screenForm.get('resolution.height')?.hasError('required')">Height is required.</mat-error>
+                                           <mat-error *ngIf="screenForm.get('resolution.height')?.hasError('min')">Height must be greater than or equal to 1.</mat-error>
+                                           <mat-error *ngIf="screenForm.get('resolution.height')?.hasError('max')">Height must be less than or equal to 100.</mat-error>
+                                           <mat-error *ngIf="screenForm.get('resolution.height')?.hasError('pattern')">Height must be a number.</mat-error> -->
+                                    </mat-form-field>
+                                </div>
                             </div>
                         </div>
                     </mat-tab>

@@ -24,6 +24,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -40,6 +41,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     CdkDragPlaceholder,
     CdkDropList, 
     CdkDropListGroup,
+    CdkMenuModule,
     DragDropModule,
     FormsModule,
     MatButtonModule,
@@ -64,7 +66,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     MatTreeModule,
     MatSlideToggleModule,
     MatDialogModule,
-    CdkMenuModule,
+    MatRippleModule,
   ]
 })
 export class MaterialUiModule { }

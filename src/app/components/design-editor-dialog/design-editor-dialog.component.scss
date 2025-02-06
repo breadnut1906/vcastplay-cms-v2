@@ -1,0 +1,30 @@
+.screen-resolution-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--mat-sys-secondary);
+    border-radius: 4px;
+
+    h6, p {
+        cursor: pointer;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--mat-sys-surface-container-low);
+        border-color: var(--mat-sys-primary);
+    }
+}
+
+
+.active {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+    border-color: var(--mat-sys-primary);
+}

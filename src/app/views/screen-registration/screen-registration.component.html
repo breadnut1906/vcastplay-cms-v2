@@ -2,8 +2,7 @@
     <mat-drawer
         #drawerDetails 
         class="shadow"
-        [ngStyle]="{ 'max-width': utility.isMobileSignal() ? '300px' : '600px' }"
-        [mode]="utility.isMobileSignal()? 'over' :'side'" 
+        mode="over"
         position="end" 
         [opened]="screen.isDrawer()" 
         (closedStart)="screen.isDrawer.set(false)"
@@ -63,7 +62,7 @@
                     <th mat-header-cell *matHeaderCellDef>Orientation</th>
                     <td mat-cell *matCellDef="let item">
                         <span class="fw-semibold">{{ item.orientation.orientation }}</span>
-                        ( <span class="fst-italic fw-light">{{ item.orientation.resolution }}</span> )
+                        ( <span class="fst-italic fw-light">{{ item.orientation.resolution.width }} x {{ item.orientation.resolution.height }}</span> )
                     </td>
                 </ng-container>
 

@@ -7,7 +7,7 @@ export interface Screen {
     group: string;
     subGroup: string;
     orientation: ScreenOrientation;
-    schedule: ScreeSchedule;
+    schedule: ScreenSchedule;
     geographic: ScreenGeoLocation;
     caltonSerial: string;
     others: ScreenDeviceDetails,
@@ -23,16 +23,19 @@ export interface ScreenAddress {
     lat: number;
     lng: number;
 }
+export interface ScreenOrientation {
+    orientation: string; // Landscape or Portrait
+    resolution: {
+        width: number;
+        height: number;
+    };
+}
 
-interface ScreeSchedule {
+interface ScreenSchedule {
     type: string;
     hours: { start: string; end: string; };
 }
 
-interface ScreenOrientation {
-    orientation: string;
-    resolution: string;
-}
 
 interface ScreenGeoLocation {
     location: string;

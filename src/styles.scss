@@ -38,6 +38,11 @@ html {
     container-height: 10px
   ));
 
+  
+  @include mat.dialog-overrides((
+    container-max-width: 800,
+  ));
+
   // @include mat.button-overrides(( 
   //   filled-container-color: #F58F20,
   //   outlined-outline-color: #F58F20,
