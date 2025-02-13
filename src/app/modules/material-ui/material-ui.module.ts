@@ -25,6 +25,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { MatRippleModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -67,6 +68,7 @@ import { MatRippleModule } from '@angular/material/core';
     MatSlideToggleModule,
     MatDialogModule,
     MatRippleModule,
+    MatCheckboxModule,
   ]
 })
 export class MaterialUiModule { }

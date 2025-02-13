@@ -43,11 +43,11 @@ html {
     container-max-width: 800,
   ));
 
-  // @include mat.button-overrides(( 
-  //   filled-container-color: #F58F20,
-  //   outlined-outline-color: #F58F20,
-  //   outlined-label-text-color: #F58F20
-  // ));
+  @include mat.button-overrides(( 
+    filled-container-color: #F58F20,
+    outlined-outline-color: #F58F20,
+    outlined-label-text-color: #F58F20
+  ));
 
   .mat-drawer-container {
     height: calc(100vh - 64px); // 64px is the height of the toolbar

@@ -1,22 +1,30 @@
-<div class="d-flex flex-column justify-content-center align-items-center vh-100">
-    <mat-card class="rounded-2">
-        <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="my-3">
-            <form class="row g-2" [formGroup]="authForm">
-                <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                    <mat-label>Username</mat-label>
-                    <input type="text" formControlName="username" matInput>
-                </mat-form-field>
-                <mat-form-field appearance="outline" subscriptSizing="dynamic">
-                    <mat-label>Password</mat-label>
-                    <input type="text" formControlName="username" matInput>
-                </mat-form-field>
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <button routerLink="/home" class="w-100" mat-flat-button>Login</button>
-        </mat-card-actions>
-    </mat-card>
+<img class="app-background" src="assets/background.jpg" alt="background" [style.z-index]="0">
+<img class="app-logo" src="assets/vcast-white.png" height="30" alt="logo">
+<div class="row p-0 m-0 align-items-center justify-content-center h-100">
+    <div class="col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
+        <mat-card class="p-3 mx-3">
+            <mat-card-header>
+                <mat-card-title>Login to your account</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="my-5 mb-3">
+                <form class="row g-3" [formGroup]="authForm">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Username</mat-label>
+                        <input type="text" formControlName="username" matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Password</mat-label>
+                        <input type="text" formControlName="username" matInput>
+                    </mat-form-field>
+                    <mat-checkbox formControlName="remember">Remember Me</mat-checkbox>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="d-flex flex-column w-100 text-center">
+                    <button class="mb-3" routerLink="/home" mat-flat-button>Login</button>
+                    <a href="#">Forget Password?</a>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>
