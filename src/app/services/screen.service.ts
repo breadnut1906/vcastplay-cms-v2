@@ -1,7 +1,9 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 import { Screen } from '../models/screen';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ScreenService {
 
     isDrawer = signal<boolean>(false);

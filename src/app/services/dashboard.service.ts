@@ -5,7 +5,9 @@ import { OfflineScreenComponent } from '../components/dashboard-components/offli
 import { SubscriptionPlanComponent } from '../components/dashboard-components/subscription-plan/subscription-plan.component';
 import { StorageService } from './storage.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DashboardService {
 
   private activeResizeId: number | null = null; // Track the currently resizing widget's ID

@@ -1,7 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 import { Template } from '../models/template';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DesignEditorService {
   
   orientations: string[] = ['Portrait', 'Landscape'];

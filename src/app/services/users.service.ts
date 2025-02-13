@@ -1,7 +1,9 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 import { Roles, Users } from '../models/account-settings';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UsersService {
 
   // Trigger when the sidebar is opened or closed

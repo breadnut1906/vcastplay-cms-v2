@@ -1,8 +1,9 @@
-<mat-toolbar class="border-bottom">
+<mat-toolbar class="border-bottom text-bg-secondary">
     <button (click)="onClickToggleSideNav()" mat-icon-button aria-label="Sidebar button">
-        <mat-icon>menu</mat-icon>
+        <mat-icon class="text-white">menu</mat-icon>
     </button>
-    <span class="mx-3">VCAST PLAY v2</span>
+    <!-- <span class="mx-3">VCAST PLAY v2</span> -->
+    <img class="mx-2" src="assets/vcast-o-white.png" alt="logo" height="30">
     <span class="spacer"></span>
     <button [mat-menu-trigger-for]="userAccount" mat-icon-button aria-label="User Account">
         <mat-icon>person</mat-icon>
@@ -16,7 +17,7 @@
 </mat-toolbar>
 
 <mat-drawer-container autosize>
-    <mat-drawer class="shadow rounded-0" #drawer [mode]="utility.isMobileSignal() ? 'over' : 'side'" [opened]="!utility.isMobileSignal()" [autoFocus]="false">
+    <mat-drawer class="shadow rounded-0 mat-drawer-menu" #drawer [mode]="utility.isMobileSignal() ? 'over' : 'side'" [opened]="!utility.isMobileSignal()" [autoFocus]="false">
         <div class="d-flex flex-column h-100">            
             <mat-nav-list class="mt-3 mb-auto" [ngClass]="{ 'ms-3': !isMinimized() || utility.isMobileSignal() }">
                 @for (item of menuItems(); track $index) {
@@ -31,7 +32,7 @@
                         (click)="onClickToggleDrawerNav()"
                     >
                         <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-                        @if (!isMinimized() || utility.isMobileSignal() ) { <div matListItemTitle>{{ item.text }}</div> }
+                        @if (!isMinimized() || utility.isMobileSignal() ) { <p matListItemTitle>{{ item.text }}</p> }
                     </mat-list-item>
                 }
             </mat-nav-list>
@@ -47,7 +48,7 @@
                     (click)="onClickToggleDrawerNav()"
                 >
                     <mat-icon matListItemIcon>settings</mat-icon>
-                    @if (!isMinimized() || utility.isMobileSignal()) { <div matListItemTitle>Settings</div> }
+                    @if (!isMinimized() || utility.isMobileSignal()) { <p matListItemTitle>Settings</p> }
                 </mat-list-item>
                 <mat-list-item 
                     class="rounded-0" 
@@ -60,15 +61,12 @@
                     (click)="onClickToggleDrawerNav()"
                 >
                     <mat-icon matListItemIcon>info</mat-icon>
-                    @if (!isMinimized() || utility.isMobileSignal()) { <div matListItemTitle>About</div> }
+                    @if (!isMinimized() || utility.isMobileSignal()) { <p matListItemTitle>About</p> }
                 </mat-list-item>
             </mat-nav-list>
         </div>
     </mat-drawer>
     <mat-drawer-content>
         <router-outlet />
-        <!-- <div class="d-flex flex-column h-100">
-            <app-footer class="mt-auto" />
-        </div> -->
     </mat-drawer-content>
 </mat-drawer-container>

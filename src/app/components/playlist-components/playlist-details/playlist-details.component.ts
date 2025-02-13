@@ -40,22 +40,20 @@ export class PlaylistDetailsComponent {
     createdOn: new FormControl(''),
     lastUpdate: new FormControl(''),
   });
+  
+  updatedPlaylist = effect(() => {
 
-  constructor() { 
-    effect(() => {
+    // Create new playlist
+    if (!this.playlist.isEditMode()) {  
+      const assets = this.assets.filteredAssets();        
+      this.assetLists = assets;
+    }
 
-      // Create new playlist
-      if (!this.playlist.isEditMode()) {  
-        const assets = this.assets.filteredAssets();        
-        this.assetLists = assets;
-      }
-
-      this.filterAssets.valueChanges.subscribe((filter) => {
-        this.assets.assetFilters.set({ type: filter });
-        this.assetLists = this.assets.filteredAssets();
-      });
-    })
-  }
+    this.filterAssets.valueChanges.subscribe((filter) => {
+      this.assets.assetFilters.set({ type: filter });
+      this.assetLists = this.assets.filteredAssets();
+    });
+  })
 
   ngOnInit() {
     this.assets.onFetchAssets();

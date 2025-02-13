@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
-import { Observable, Subject, takeUntil } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ToastrService } from 'ngx-toastr';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,10 @@ export class UtilityService {
     if (bytes === 0) return '0 Byte';
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     return (bytes / Math.pow(1024, i)).toFixed(2) +'' + sizes[i];
+  }
+
+  formatDate(value: Date | string, format: string = 'yyyy-MM-dd HH:mm:ss'): string {
+    return moment(value).format(format);
   }
 
   onShowNotification(title: string, message: string, type: string = 'success'): void {

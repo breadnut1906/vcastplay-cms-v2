@@ -1,5 +1,5 @@
 <mat-drawer-container>
-    <mat-drawer #drawer mode="side" position="end" opened>
+    <mat-drawer #drawer mode="side" position="end">
         <mat-tab-group>
             <mat-tab label="Assets">List of assets</mat-tab>
             <mat-tab label="Templates">Lists of Templates</mat-tab>
@@ -80,6 +80,10 @@
                 (dragStart)="onDragStart($event)"
                 (selectEnd)="onSelectEnd($event)"
             />
+        </div>
+
+        <div class="position-absolute end-0 top-50 ">
+            <button class="rounded-0 p-0 m-0" (click)="drawer.toggle()"><mat-icon>chevron_left</mat-icon></button>
         </div>
     </mat-drawer-content>
 </mat-drawer-container>

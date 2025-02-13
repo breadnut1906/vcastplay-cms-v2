@@ -22,13 +22,15 @@ export class PlaylistsComponent {
   utility = inject(UtilityService);
   showFilter = signal<boolean>(false);
 
-  displayedColumns: string[] = [ 'preview', 'name', 'type', 'lastUpdate', 'status', 'actions'];
+  displayedColumns: string[] = [ 'preview', 'name', 'lastUpdate', 'status', 'actions'];
   DATASOURCE: MatTableDataSource<Playlist> = new MatTableDataSource<Playlist>([]);
 
   constructor() { 
     effect(() => {
       this.playlist.onFetchPlaylists();
-      this.DATASOURCE.data = this.playlist.playlists();      
+      this.DATASOURCE.data = this.playlist.playlists();    
+      console.log(this.DATASOURCE.data);
+        
     })
   }
 

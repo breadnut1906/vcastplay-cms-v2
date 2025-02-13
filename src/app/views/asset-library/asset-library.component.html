@@ -82,7 +82,7 @@
 
                 <ng-container matColumnDef="lastUpdate">
                     <th mat-header-cell *matHeaderCellDef>Last Update</th>
-                    <td mat-cell *matCellDef="let item">{{ item.lastUpdate }}</td>
+                    <td mat-cell *matCellDef="let item">{{ utility.formatDate(item.lastUpdate, 'MMM DD, yyyy HH:mm a') }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="actions" stickyEnd>
@@ -120,7 +120,7 @@
                 <mat-card-header>
                     <div class="d-flex flex-column">
                         <mat-card-title>{{ item.name }}</mat-card-title>
-                        <mat-card-subtitle>{{ item.lastUpdate }}</mat-card-subtitle>
+                        <mat-card-subtitle>{{ utility.formatDate(item.lastUpdate, 'MMM DD, yyyy HH:mm a') }}</mat-card-subtitle>
                     </div>
                     <div class="spacer"></div>
                     <button [mat-menu-trigger-for]="buttons" mat-icon-button><mat-icon>more_vert</mat-icon></button>

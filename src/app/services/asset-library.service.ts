@@ -1,7 +1,9 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Assets } from '../models/asset-library';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AssetLibraryService {
 
   isDrawer = signal<boolean>(false);

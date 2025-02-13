@@ -1,7 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 import { Playlist } from '../models/playlist';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PlaylistService {
   
   isDrawer = signal<boolean>(false);

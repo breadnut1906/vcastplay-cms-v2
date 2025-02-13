@@ -1,5 +1,9 @@
 .active {
-    background-color: var(--mat-sys-primary-container);
-    color: var(--mat-sys-on-primary-container);
-    border-right: 3px solid var(--mat-sys-primary);
+    background-color: #F58F20; //var(--mat-sys-primary-container);
+    color: #fff; //var(--mat-sys-on-primary-container);
+    // border-right: 3px solid #fff; //var(--mat-sys-primary);
+
+    mat-icon, p {
+        color: #fff;
+    }
 }

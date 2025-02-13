@@ -2,7 +2,7 @@
     <mat-drawer 
         #drawerDetails 
         class="sideNavDetails shadow"
-        [mode]="utility.isMobileSignal()? 'over' :'side'" 
+        mode="over"
         position="end" 
         [opened]="user.isDrawer()" 
         (closedStart)="user.isDrawer.set(false)" 
