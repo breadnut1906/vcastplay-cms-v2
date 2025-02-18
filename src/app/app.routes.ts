@@ -3,6 +3,11 @@ import { Routes } from '@angular/router';
 const projectTitle: string = 'VCASTPLAY 2.0';
 export const routes: Routes = [
     {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home',
+    },
+    {
         path: 'login',
         loadComponent: () => import('./views/authentication/login/login.component').then(m => m.LoginComponent),
         title: `${projectTitle} · Login`,
